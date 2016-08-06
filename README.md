@@ -45,6 +45,9 @@ modules: [
         module: 'MMM-Formula1',
         position: 'top_right',
         header: 'F1 Standings',
+        config: {
+            // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
+        }
     },
 ]
 ````
@@ -63,6 +66,13 @@ The following properties can be configured:
         </tr>
     <thead>
     <tbody>
+        <tr>
+            <td><code>maxRows</code></td>
+            <td><b>Optional</b> - The maximum number of rows to show in the standings table.<br>
+                <br><b>Possible values:</b> <code>false</code> or a <code>number</code>.
+                <br><b>Default value:</b> <code>false</code>
+            </td>
+        </tr>
         <tr>
             <td><code>fade</code></td>
             <td><b>Optional</b> - Whether to fade the activities to black. (Gradient)<br>

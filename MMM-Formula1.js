@@ -9,6 +9,7 @@ Module.register("MMM-Formula1",{
 
     // Default module config.
     defaults: {
+        maxRows: false,
         fade: true,
         fadePoint: 0.4,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
@@ -67,7 +68,8 @@ Module.register("MMM-Formula1",{
 
         // Add row to table for each driver in the standings.
         var driverStandings = this.ergastData.StandingsTable.StandingsLists[0].DriverStandings;
-        for (i = 0; i < driverStandings.length; i++) {
+        var rowsToDisplay = (this.config.maxRows) ? Math.min(this.config.maxRows, driverStandings.length) : driverStandings.length;
+        for (i = 0; i < rowsToDisplay; i++) {
             var driverStanding = driverStandings[i];
            
             var driver = [driverStanding.Driver.givenName, driverStanding.Driver.familyName].join(" ");
@@ -87,8 +89,8 @@ Module.register("MMM-Formula1",{
                 if (this.config.fadePoint < 0) {
                     this.config.fadePoint = 0;
                 }
-                var startingPoint = driverStandings.length * this.config.fadePoint;
-                var steps = driverStandings.length - startingPoint;
+                var startingPoint = this.config.maxRows * this.config.fadePoint;
+                var steps = this.config.maxRows - startingPoint;
                 if (i >= startingPoint) {
                     var currentStep = i - startingPoint;
                     dataRow.style.opacity = 1 - (1 / steps * currentStep);
