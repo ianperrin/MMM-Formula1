@@ -11,7 +11,7 @@ Module.register("MMM-Formula1",{
     defaults: {
         maxRows: false,
         fade: true,
-        fadePoint: 0.4,
+        fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
         animationSpeed: 2.5 * 1000,           // 2.5 seconds
     },
@@ -89,8 +89,8 @@ Module.register("MMM-Formula1",{
                 if (this.config.fadePoint < 0) {
                     this.config.fadePoint = 0;
                 }
-                var startingPoint = this.config.maxRows * this.config.fadePoint;
-                var steps = this.config.maxRows - startingPoint;
+                var startingPoint = rowsToDisplay * this.config.fadePoint;
+                var steps = rowsToDisplay - startingPoint;
                 if (i >= startingPoint) {
                     var currentStep = i - startingPoint;
                     dataRow.style.opacity = 1 - (1 / steps * currentStep);
