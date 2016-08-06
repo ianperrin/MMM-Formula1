@@ -12,7 +12,10 @@ var ErgastAPI = (function() {
     var API = '/api/f1/';
     var PORT = 80;
 
-    var driverStandings = {updated:false};
+    var standings = {
+        driverStandings: {updated:false},
+        constructorStandings: {updated:false}
+    };
 
     /// Private Methods
 
@@ -138,27 +141,29 @@ var ErgastAPI = (function() {
     // F1
 
     /**
-     * getDriverStandings
-     * Request the driver standings from the current Formula 1 season 
+     * getStandings
+     * Request the specified type standings from the specified Formula 1 season
+     * @param  {string, int} season        The season to fetch.
+     * @param  {string} type               The type of standings (driver or constructor).
      * @param  {Function} callback         The callback after the data is received.
-     * http://ergast.com/api/v1/f1/current/driverStandings.json
+     * http://ergast.com/api/v1/f1/{season}/{type}.json
      */
-    self.getDriverStandings = function(callback) {
-        makeSimpleApiRequest('current/driverStandings.json', function(data) {
+    self.getStandings = function(season, type, callback) {
+        makeSimpleApiRequest(season + '/' + type + '.json', function(data) {
             if (!data) {
                 console.log("Error while fetching driver standings.");
-                callback(driverStandings);
+                callback(standings[type]);
                 return;
             }
 
             if (Object.keys(data).length !== 0) {
-                driverStandings = extend(driverStandings, data);
-                driverStandings.updated = true;
+                standings[type] = extend(standings[type], data);
+                standings[type].updated = true;
             } else {
-                driverStandings.updated = false;
+                standings[type].updated = false;
             }
 
-            callback(driverStandings);
+            callback(standings[type]);
         });
     };
 

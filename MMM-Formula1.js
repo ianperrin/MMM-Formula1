@@ -14,10 +14,12 @@ Module.register("MMM-Formula1",{
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
         animationSpeed: 2.5 * 1000,           // 2.5 seconds
+        season: 'current',
+        type: 'DRIVER'
     },
 
     // Store the Ergast data in an object.
-    ergastData: null,
+    ergastData: {DRIVER: null, CONSTRUCTOR: null},
 
     // A loading boolean.
     loading: true,
@@ -31,7 +33,8 @@ Module.register("MMM-Formula1",{
     getTranslations: function() {
         return {
                 en: "translations/en.json",
-                nl: "translations/nl.json"
+                nl: "translations/nl.json",
+                de: "translations/de.json"
         };
     },
 
@@ -45,7 +48,11 @@ Module.register("MMM-Formula1",{
     socketNotificationReceived: function(notification, payload) {
         Log.info(this.name + " received a notification: " + notification);
         if (notification === "DRIVER_STANDINGS") {
-            this.ergastData = payload.MRData;
+            this.ergastData.DRIVER = payload.MRData;
+            this.loading = false;
+            this.updateDom(this.config.animationSpeed);
+        } else if(notification === "CONSTRUCTOR_STANDINGS"){
+            this.ergastData.CONSTRUCTOR = payload.MRData;
             this.loading = false;
             this.updateDom(this.config.animationSpeed);
         }
@@ -67,16 +74,19 @@ Module.register("MMM-Formula1",{
         tableWrapper.appendChild(this.createHeaderRow());
 
         // Add row to table for each driver in the standings.
-        var driverStandings = this.ergastData.StandingsTable.StandingsLists[0].DriverStandings;
-        var rowsToDisplay = (this.config.maxRows) ? Math.min(this.config.maxRows, driverStandings.length) : driverStandings.length;
+        var standings = this.config.type === 'DRIVER' ? this.ergastData.DRIVER.StandingsTable.StandingsLists[0].DriverStandings : this.ergastData.CONSTRUCTOR.StandingsTable.StandingsLists[0].ConstructorStandings;
+        var rowsToDisplay = (this.config.maxRows) ? Math.min(this.config.maxRows, standings.length) : standings.length;
         for (i = 0; i < rowsToDisplay; i++) {
-            var driverStanding = driverStandings[i];
-           
-            var driver = [driverStanding.Driver.givenName, driverStanding.Driver.familyName].join(" ");
-            var countryCode = this.getCodeFromNationality(driverStanding.Driver.nationality);
-            var constructor = driverStanding.Constructors[0].name;
-            var points = driverStanding.points;
-            var wins = driverStanding.wins;
+            var standing = standings[i];
+
+            var driver;
+            if(this.config.type === 'DRIVER'){
+                driver = [standing.Driver.givenName, standing.Driver.familyName].join(" ");
+            }
+            var countryCode = this.getCodeFromNationality(standing[this.config.type === 'DRIVER' ? 'Driver' : 'Constructor'].nationality);
+            var constructor = this.config.type === 'DRIVER' ? standing.Constructors[0].name : standing.Constructor.name;
+            var points = standing.points;
+            var wins = standing.wins;
                                                            
             var dataRow = this.createDataRow(driver, 
                                                 countryCode,
@@ -106,7 +116,7 @@ Module.register("MMM-Formula1",{
         var footerTd =  document.createElement("td");
         footerTd.className = "xsmall align-right";
         footerTd.colSpan = tableWrapper.rows[0].cells.length;
-        footerTd.innerHTML = "Season: " + this.ergastData.StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData.StandingsTable.StandingsLists[0].round;
+        footerTd.innerHTML = "Season: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].round;
         footerTr.appendChild(footerTd);
         tableWrapper.appendChild(footerTd);
 
@@ -126,9 +136,11 @@ Module.register("MMM-Formula1",{
         var flagTd =  document.createElement("td");
         tr.appendChild(flagTd);
 
-        var driverTd =  document.createElement("td");
-        driverTd.innerHTML = this.translate("DRIVER");
-        tr.appendChild(driverTd);
+        if(this.config.type === 'DRIVER'){
+            var driverTd =  document.createElement("td");
+            driverTd.innerHTML = this.translate("DRIVER");
+            tr.appendChild(driverTd);
+        }
 
         var constructorTd =  document.createElement("td");
         constructorTd.innerHTML = this.translate("CONSTRUCTOR");
@@ -179,10 +191,12 @@ Module.register("MMM-Formula1",{
             flagCell.appendChild(flagImg);
         tr.appendChild(flagCell);
 
-        var driverCell = document.createElement("td");
-        driverCell.className = "title bright";
-        driverCell.innerHTML = driver;
-        tr.appendChild(driverCell);
+        if(this.config.type === 'DRIVER'){
+            var driverCell = document.createElement("td");
+            driverCell.className = "title bright";
+            driverCell.innerHTML = driver;
+            tr.appendChild(driverCell);
+        }
 
         var constructorCell = document.createElement("td");
         constructorCell.className = "title light";
@@ -468,6 +482,6 @@ Module.register("MMM-Formula1",{
         {demonym : "South African", code : "ZA" },
         {demonym : "Zambian", code : "ZM" },
         {demonym : "Zimbabwean", code : "ZW" }
-    ],
+    ]
      
 });
