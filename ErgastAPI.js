@@ -139,9 +139,10 @@ var ErgastAPI = (function() {
 
     /**
      * getDriverStandings
-     * Request the driver standings from the current Formula 1 season 
+     * Request the driver standings from the specified Formula 1 season
+     * @param  {string, int} season        The season to fetch.
      * @param  {Function} callback         The callback after the data is received.
-     * http://ergast.com/api/v1/f1/current/driverStandings.json
+     * http://ergast.com/api/v1/f1/{season}/driverStandings.json
      */
     self.getDriverStandings = function(season, callback) {
         makeSimpleApiRequest(season + '/driverStandings.json', function(data) {
