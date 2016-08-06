@@ -18,7 +18,7 @@ var ErgastAPI = (function() {
 
     /**
      * makeRequest
-     * Makes a request to the Strava API server. It can be used for both the API requests as well as the oAuth requests.
+     * Makes a request to the Ergast Developer API server. It can be used for both the API requests as well as the oAuth requests.
      * @param  {Object} options request options.
      */
     function makeRequest(options) {
@@ -109,7 +109,7 @@ var ErgastAPI = (function() {
 
     /**
      * makeApiRequest
-     * Makes a request to the Strava JSON api.
+     * Makes a request to the Ergast Developer JSON api.
      * @param  {options} options request options.
      */
     function makeApiRequest(options) {

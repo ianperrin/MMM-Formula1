@@ -79,7 +79,7 @@ The following properties can be configured:
         </tr>
         <tr>
             <td><code>reloadInterval</code></td>
-            <td><b>Optional</b> - How often does the data needs to be reloaded from the API? (Milliseconds). See <a href="http://strava.github.io/api/#rate-limiting">Strava documentation</a> for API rate limits<br>
+            <td><b>Optional</b> - How often does the data needs to be reloaded from the API? (Milliseconds). See <a href="http://ergast.com/mrd/terms/">Terms &amp; Conditions</a> for API responsible use.<br>
                 <br><b>Possible values:</b> <code>7500</code> - <code>86400000</code>
                 <br><b>Default value:</b> <code>1800000</code> (30 minutes)
             </td>

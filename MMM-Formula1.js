@@ -15,7 +15,7 @@ Module.register("MMM-Formula1",{
         animationSpeed: 2.5 * 1000,           // 2.5 seconds
     },
 
-    // Store the strava data in an object.
+    // Store the Ergast data in an object.
     ergastData: null,
 
     // A loading boolean.
@@ -42,7 +42,7 @@ Module.register("MMM-Formula1",{
 
     // Subclass socketNotificationReceived method.
     socketNotificationReceived: function(notification, payload) {
-        Log.info(this.name + " received a notification:" + notification);
+        Log.info(this.name + " received a notification: " + notification);
         if (notification === "DRIVER_STANDINGS") {
             this.ergastData = payload.MRData;
             this.loading = false;

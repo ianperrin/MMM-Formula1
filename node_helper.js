@@ -38,7 +38,7 @@ module.exports = NodeHelper.create({
      * Request driver standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
      */
     fetchDriverStandings: function() {
-        console.log("MMM-Strava is fetching athlete stats");
+        console.log(this.name + " is fetching driver standings");
         var self = this;
         this.fetcherRunning = true;
         ErgastAPI.getDriverStandings(function(driverStandings) {
@@ -48,7 +48,7 @@ module.exports = NodeHelper.create({
             }
 
             setTimeout(function() {
-                self.fetchDriverStandings(athleteId);
+                self.fetchDriverStandings();
             }, self.config.reloadInterval);
         });
     }
