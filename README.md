@@ -11,6 +11,9 @@ A MagicMirror Module for displaying the driver standings from the current Formul
 * The drivers current points total.
 * The drivers current number of wins.
 
+### In addition you can configure the following options
+* How many drivers to display in the standings table `maxRows`
+
 ## Installation
 
 In your terminal, go to your MagicMirror's Module folder:
