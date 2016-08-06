@@ -7,6 +7,7 @@
  */
 
 var ErgastAPI = require("./ErgastAPI.js");
+const NodeHelper = require("node_helper");
 
 module.exports = NodeHelper.create({
     // Subclass start method.
@@ -41,7 +42,7 @@ module.exports = NodeHelper.create({
         console.log(this.name + " is fetching driver standings");
         var self = this;
         this.fetcherRunning = true;
-        ErgastAPI.getDriverStandings(function(driverStandings) {
+        ErgastAPI.getDriverStandings(this.config.season, function(driverStandings) {
             if (driverStandings && driverStandings.updated) {
                 self.driverStandings = driverStandings;
                 self.sendSocketNotification('DRIVER_STANDINGS', driverStandings);
