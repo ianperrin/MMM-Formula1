@@ -9,13 +9,13 @@ Module.register("MMM-Formula1",{
 
     // Default module config.
     defaults: {
+        season: 'current',
+        type: 'DRIVER',
         maxRows: false,
         fade: true,
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
-        animationSpeed: 2.5 * 1000,           // 2.5 seconds
-        season: 'current',
-        type: 'DRIVER'
+        animationSpeed: 2.5 * 1000           // 2.5 seconds
     },
 
     // Store the Ergast data in an object.
@@ -199,7 +199,7 @@ Module.register("MMM-Formula1",{
         }
 
         var constructorCell = document.createElement("td");
-        constructorCell.className = "title light";
+        constructorCell.className = this.config.type === 'DRIVER' ? "title light" : "title bright";
         constructorCell.innerHTML = constructor;
         tr.appendChild(constructorCell);
 

@@ -1,18 +1,22 @@
 # MagicMirror Module: MMM-Formula1
-A MagicMirror Module for displaying the driver standings from the current Formula 1 season.
+A MagicMirror Module for displaying standings for the Formula 1 drivers and constructors championships.
 
 ## Example
 
 ![](.github/example.png)
 
-### The module displays the driver standings from the current Formula 1 season including:
-* The drivers name.
-* The drivers constructor.
-* The drivers current points total.
-* The drivers current number of wins.
+### The module displays the standings from the current Formula 1 season including:
+* The flag for the driver or constructor.
+* The drivers name (when the drivers standings are displayed).
+* The constructor name.
+* The current points total.
+* The current number of wins.
 
 ### In addition you can configure the following options
-* How many drivers to display in the standings table `maxRows`
+* Which season to display the standings for `season`
+* Whether to show the drivers or constructors standings `type`
+* How many drivers/constructors to display in the standings table `maxRows`
+
 
 ## Installation
 
@@ -70,8 +74,22 @@ The following properties can be configured:
     <thead>
     <tbody>
         <tr>
+            <td><code>season</code></td>
+            <td><b>Optional</b> - The season to display.<br>
+                <br><b>Possible values:</b><code>1950</code> - <code>2016</code>
+                <br><b>Default value:</b> <code>'current'</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>type</code></td>
+            <td><b>Optional</b> - The type of standings to display.<br>
+                <br><b>Possible values:</b><code>'DRIVER'</code> or <code>'CONSTRUCTOR'</code>
+                <br><b>Default value:</b> <code>'DRIVER'</code>
+            </td>
+        </tr>
+        <tr>
             <td><code>maxRows</code></td>
-            <td><b>Optional</b> - The maximum number of rows to show in the standings table.<br>
+            <td><b>Optional</b> - The maximum number of drivers/constructors to show in the standings table.<br>
                 <br><b>Possible values:</b> <code>false</code> or a <code>number</code>.
                 <br><b>Default value:</b> <code>false</code>
             </td>
@@ -92,7 +110,7 @@ The following properties can be configured:
         </tr>
         <tr>
             <td><code>reloadInterval</code></td>
-            <td><b>Optional</b> - How often does the data needs to be reloaded from the API? (Milliseconds). See <a href="http://ergast.com/mrd/terms/">Terms &amp; Conditions</a> for API responsible use.<br>
+            <td><b>Optional</b> - How often does the data needs to be reloaded from the API? (Milliseconds). See the <a href="http://ergast.com/mrd/terms/">Terms &amp; Conditions</a> for responsible use of the API.<br>
                 <br><b>Possible values:</b> <code>7500</code> - <code>86400000</code>
                 <br><b>Default value:</b> <code>1800000</code> (30 minutes)
             </td>
@@ -102,20 +120,6 @@ The following properties can be configured:
             <td><b>Optional</b> - The speed of the update animation. (Milliseconds)<br>
                 <br><b>Possible values:</b><code>0</code> - <code>5000</code>
                 <br><b>Default value:</b> <code>2500</code> (2.5 seconds)
-            </td>
-        </tr>
-        <tr>
-            <td><code>season</code></td>
-            <td><b>Optional</b> - The season to display.<br>
-                <br><b>Possible values:</b><code>1950</code> - <code>2016</code>
-                <br><b>Default value:</b> <code>'current'</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>type</code></td>
-            <td><b>Optional</b> - The type of standings to display.<br>
-                <br><b>Possible values:</b><code>'DRIVER'</code> or <code>'CONSTRUCTOR'</code>
-                <br><b>Default value:</b> <code>'DRIVER'</code>
             </td>
         </tr>
     </tbody>
