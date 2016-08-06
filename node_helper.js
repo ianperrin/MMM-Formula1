@@ -51,7 +51,7 @@ module.exports = NodeHelper.create({
         ErgastAPI.getStandings(this.config.season, type, function(standings) {
             if (standings && standings.updated) {
                 self[type] = standings;
-                self.sendSocketNotification(this.config.type + '_STANDINGS', standings);
+                self.sendSocketNotification(self.config.type + '_STANDINGS', standings);
             }
 
             setTimeout(function() {
