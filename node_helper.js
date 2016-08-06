@@ -25,10 +25,8 @@ module.exports = NodeHelper.create({
         if (notification === "CONFIG") {
             
             this.config = payload;
-            if (!this.fetcherRunning && this.config.type === 'DRIVER') {
-                this.fetchDriverStandings();
-            } else if(!this.fetcherRunning && this.config.type === 'CONSTRUCTOR'){
-                this.fetchConstructorStandings();
+            if (!this.fetcherRunning) {
+                this.fetchStandings();
             }
 
             if (this.driverStandings) {
@@ -42,41 +40,22 @@ module.exports = NodeHelper.create({
     },
 
     /**
-     * fetchDriverStandings
-     * Request driver standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
+     * fetchStandings
+     * Request driver or constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
      */
-    fetchDriverStandings: function() {
-        console.log(this.name + " is fetching driver standings");
+    fetchStandings: function() {
+        console.log(this.name + " is fetching " + (this.config.type === 'DRIVER' ? 'driver' : 'constructor') + " standings");
         var self = this;
         this.fetcherRunning = true;
-        ErgastAPI.getDriverStandings(this.config.season, function(driverStandings) {
-            if (driverStandings && driverStandings.updated) {
-                self.driverStandings = driverStandings;
-                self.sendSocketNotification('DRIVER_STANDINGS', driverStandings);
+        var type = this.config.type === 'DRIVER' ? 'driverStandings' : 'constructorStandings';
+        ErgastAPI.getStandings(this.config.season, type, function(standings) {
+            if (standings && standings.updated) {
+                self[type] = standings;
+                self.sendSocketNotification(this.config.type + '_STANDINGS', standings);
             }
 
             setTimeout(function() {
-                self.fetchDriverStandings();
-            }, self.config.reloadInterval);
-        });
-    },
-
-    /**
-     * fetchConstructorStandings
-     * Request constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
-     */
-    fetchConstructorStandings: function() {
-        console.log(this.name + " is fetching constructor standings");
-        var self = this;
-        this.fetcherRunning = true;
-        ErgastAPI.getConstructorStandings(this.config.season, function(constructorStandings) {
-            if (constructorStandings && constructorStandings.updated) {
-                self.constructorStandings = constructorStandings;
-                self.sendSocketNotification('CONSTRUCTOR_STANDINGS', constructorStandings);
-            }
-
-            setTimeout(function() {
-                self.fetchConstructorStandings();
+                self.fetchStandings();
             }, self.config.reloadInterval);
         });
     }
