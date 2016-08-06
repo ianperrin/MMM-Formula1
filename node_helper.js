@@ -41,7 +41,7 @@ module.exports = NodeHelper.create({
         console.log(this.name + " is fetching driver standings");
         var self = this;
         this.fetcherRunning = true;
-        ErgastAPI.getDriverStandings(function(driverStandings) {
+        ErgastAPI.getDriverStandings(this.config.season, function(driverStandings) {
             if (driverStandings && driverStandings.updated) {
                 self.driverStandings = driverStandings;
                 self.sendSocketNotification('DRIVER_STANDINGS', driverStandings);

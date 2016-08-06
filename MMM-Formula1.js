@@ -14,6 +14,7 @@ Module.register("MMM-Formula1",{
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
         animationSpeed: 2.5 * 1000,           // 2.5 seconds
+        season: 'current'
     },
 
     // Store the Ergast data in an object.

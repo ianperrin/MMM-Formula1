@@ -143,8 +143,8 @@ var ErgastAPI = (function() {
      * @param  {Function} callback         The callback after the data is received.
      * http://ergast.com/api/v1/f1/current/driverStandings.json
      */
-    self.getDriverStandings = function(callback) {
-        makeSimpleApiRequest('current/driverStandings.json', function(data) {
+    self.getDriverStandings = function(season, callback) {
+        makeSimpleApiRequest(season + '/driverStandings.json', function(data) {
             if (!data) {
                 console.log("Error while fetching driver standings.");
                 callback(driverStandings);
