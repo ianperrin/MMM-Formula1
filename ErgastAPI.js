@@ -13,6 +13,7 @@ var ErgastAPI = (function() {
     var PORT = 80;
 
     var driverStandings = {updated:false};
+    var constructorStandings = {updated:false};
 
     /// Private Methods
 
@@ -139,9 +140,9 @@ var ErgastAPI = (function() {
 
     /**
      * getDriverStandings
-     * Request the driver standings from the current Formula 1 season 
+     * Request the driver standings from the current Formula 1 season
      * @param  {Function} callback         The callback after the data is received.
-     * http://ergast.com/api/v1/f1/current/driverStandings.json
+     * http://ergast.com/api/v1/f1/{season}/driverStandings.json
      */
     self.getDriverStandings = function(season, callback) {
         makeSimpleApiRequest(season + '/driverStandings.json', function(data) {
@@ -159,6 +160,32 @@ var ErgastAPI = (function() {
             }
 
             callback(driverStandings);
+        });
+    };
+
+    /**
+     * getConstructorStandings
+     * Request the constructor standings from the current Formula 1 season
+     * @param  {string, int} season        The season to fetch.
+     * @param  {Function} callback         The callback after the data is received.
+     * http://ergast.com/api/v1/f1/{season}/constructorStandings.json
+     */
+    self.getConstructorStandings = function(season, callback) {
+        makeSimpleApiRequest(season + '/constructorStandings.json', function(data) {
+            if (!data) {
+                console.log("Error while fetching driver standings.");
+                callback(constructorStandings);
+                return;
+            }
+
+            if (Object.keys(data).length !== 0) {
+                constructorStandings = extend(constructorStandings, data);
+                constructorStandings.updated = true;
+            } else {
+                constructorStandings.updated = false;
+            }
+
+            callback(constructorStandings);
         });
     };
 
