@@ -104,5 +104,12 @@ The following properties can be configured:
                 <br><b>Default value:</b> <code>2500</code> (2.5 seconds)
             </td>
         </tr>
+        <tr>
+            <td><code>season</code></td>
+            <td><b>Optional</b> - The season to display.<br>
+                <br><b>Possible values:</b><code>1950</code> - <code>2016</code>
+                <br><b>Default value:</b> <code>'current'</code>
+            </td>
+        </tr>
     </tbody>
 </table>
