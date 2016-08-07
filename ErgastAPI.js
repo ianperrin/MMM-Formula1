@@ -17,6 +17,8 @@ var ErgastAPI = (function() {
         constructorStandings: {updated:false}
     };
 
+    var schedule = {updated:false};
+
     /// Private Methods
 
     /**
@@ -137,7 +139,6 @@ var ErgastAPI = (function() {
         });
     }
 
-
     // F1
 
     /**
@@ -146,7 +147,7 @@ var ErgastAPI = (function() {
      * @param  {string, int} season        The season to fetch.
      * @param  {string} type               The type of standings (driver or constructor).
      * @param  {Function} callback         The callback after the data is received.
-     * http://ergast.com/api/v1/f1/{season}/{type}.json
+     * http://ergast.com/api/f1/{season}/{type}.json
      */
     self.getStandings = function(season, type, callback) {
         makeSimpleApiRequest(season + '/' + type + '.json', function(data) {
@@ -164,6 +165,32 @@ var ErgastAPI = (function() {
             }
 
             callback(standings[type]);
+        });
+    };
+
+    /**
+     * getSchedule
+     * Request the race schedule for the specified Formula 1 season
+     * @param  {string, int} season        The season to fetch.
+     * @param  {Function} callback         The callback after the data is received.
+     * http://ergast.com/api/f1/current.json
+     */
+    self.getSchedule = function(season, callback) {
+        makeSimpleApiRequest(season + '.json', function(data) {
+            if (!data) {
+                console.log("Error while fetching race schedule.");
+                callback(schedule);
+                return;
+            }
+
+            if (Object.keys(data).length !== 0) {
+                schedule = extend(schedule, data);
+                schedule.updated = true;
+            } else {
+                schedule.updated = false;
+            }
+
+            callback(schedule);
         });
     };
 

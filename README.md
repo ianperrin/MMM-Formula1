@@ -1,5 +1,5 @@
 # MagicMirror Module: MMM-Formula1
-A MagicMirror Module for displaying standings for the Formula 1 drivers and constructors championships.
+A MagicMirror Module for displaying Formula 1 standings and race schedule.
 
 ## Example
 
@@ -16,6 +16,7 @@ A MagicMirror Module for displaying standings for the Formula 1 drivers and cons
 * Which season to display the standings for `season`
 * Whether to show the drivers or constructors standings `type`
 * How many drivers/constructors to display in the standings table `maxRows`
+* Display the upcoming race schedule using the standard [calendar](https://github.com/MichMich/MagicMirror/tree/develop/modules/default/calendar) module
 
 
 ## Installation
@@ -95,6 +96,13 @@ The following properties can be configured:
             </td>
         </tr>
         <tr>
+            <td><code>calendar</code></td>
+            <td><b>Optional</b> - Whether the module should publish the upcoming Race Schedule as an ical.<br>
+                <br><b>Possible values:</b> <code>true</code> or <code>false</code>.
+                <br><b>Default value:</b> <code>false</code>
+            </td>
+        </tr>
+        <tr>
             <td><code>fade</code></td>
             <td><b>Optional</b> - Whether to fade the activities to black. (Gradient)<br>
                 <br><b>Possible values:</b> <code>true</code> or <code>false</code>
@@ -124,3 +132,33 @@ The following properties can be configured:
         </tr>
     </tbody>
 </table>
+
+### Displaying the Race Schedule
+Stop your Magic Mirror (your exact method may vary)
+````
+pm2 stop mm
+````
+Install `ical-generator` in your MMM-Formula1 module directory.
+````
+cd ~/MagicMirror/modules/MMM-Formula1
+npm install ical-generator
+````
+Set the `calendar` option for your MMM-Formula1 module to true.
+````
+        config: {
+            // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
+            calendar: true,
+        }
+```` 
+Add the Formula 1 Race Schedule calendar to the `calendar` module to your configuration (`config/config.js`).
+```
+{
+    symbol: ' flag-checkered',
+    url: 'http://localhost:8080/MMM-Formula1/schedule.ics',
+}
+```
+Restart your Magic Mirror
+Start your Magic Mirror (your exact method may vary)
+````
+pm2 start mm
+````

@@ -1,0 +1,25 @@
+{
+  "name": "MMM-Formula1",
+  "version": "1.2.0",
+  "description": "A Formula 1 module for the Magic Mirror.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianperrin/MMM-Formula1"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "Formula1",
+    "module"
+  ],
+  "author": "Ian Perrin",
+  "contributors": "https://github.com/ianperrin/MMM-Formula1/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianperrin/MMM-Formula1/issues"
+  },
+  "homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
+  "dependencies": {
+    "ical-generator": "^0.2.7"
+  }
+}
