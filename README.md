@@ -157,8 +157,7 @@ Add the Formula 1 Race Schedule calendar to the `calendar` module to your config
     url: 'http://localhost:8080/MMM-Formula1/schedule.ics',
 }
 ```
-Restart your Magic Mirror
-Start your Magic Mirror (your exact method may vary)
+Restart your Magic Mirror (your exact method may vary)
 ````
 pm2 start mm
 ````
