@@ -12,7 +12,7 @@ Module.register("MMM-Formula1",{
         season: 'current',
         type: 'DRIVER',
         maxRows: false,
-        calendar: true,
+        calendar: false,
         fade: true,
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
