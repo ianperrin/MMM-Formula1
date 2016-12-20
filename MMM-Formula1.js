@@ -85,7 +85,9 @@ Module.register("MMM-Formula1",{
                 driver = [standing.Driver.givenName, standing.Driver.familyName].join(" ");
             }
             var countryCode = this.getCodeFromNationality(standing[this.config.type === 'DRIVER' ? 'Driver' : 'Constructor'].nationality);
-            var constructor = this.config.type === 'DRIVER' ? standing.Constructors[0].name : standing.Constructor.name;
+            var constructor = this.config.type === 'DRIVER' ? standing.Constructors.map(function(elem){
+                                                                    return elem.name;
+                                                                }).join("/") : standing.Constructor.name;
             var points = standing.points;
             var wins = standing.wins;
                                                            
