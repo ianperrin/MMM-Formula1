@@ -69,6 +69,14 @@ Module.register("MMM-Formula1",{
             return loadingWrapper;
         }
 
+        if ( (this.config.type === 'DRIVER' && this.ergastData.DRIVER.StandingsTable.StandingsLists.length === 0) 
+                || (this.config.type != 'DRIVER' && this.ergastData.CONSTRUCTOR.StandingsTable.StandingsLists.length === 0) ) {
+            var noDataWrapper = document.createElement("div");
+            noDataWrapper.innerHTML = this.translate("NO DATA");
+            noDataWrapper.className = "small dimmed light";
+            return noDataWrapper;
+        }
+
         var tableWrapper = document.createElement("table");
         tableWrapper.className = "small";
 

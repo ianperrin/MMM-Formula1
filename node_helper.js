@@ -78,7 +78,7 @@ module.exports = NodeHelper.create({
         console.log(this.name + " is fetching the race schedule");
         var self = this;
 //        this.fetcherRunning = true;
-        ErgastAPI.getSchedule('current', function(raceSchedule) {
+        ErgastAPI.getSchedule(this.config.season, function(raceSchedule) {
             if (raceSchedule && raceSchedule.updated) {
                 raceScheduleDB = raceSchedule;
                 self.sendSocketNotification('RACE_SCHEDULE', raceSchedule);
