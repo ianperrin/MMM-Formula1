@@ -35,7 +35,8 @@ Module.register("MMM-Formula1",{
         return {
                 en: "translations/en.json",
                 nl: "translations/nl.json",
-                de: "translations/de.json"
+                de: "translations/de.json",
+                id: "translations/id.json"
         };
     },
 
@@ -69,7 +70,7 @@ Module.register("MMM-Formula1",{
             return loadingWrapper;
         }
 
-        if ( (this.config.type === 'DRIVER' && this.ergastData.DRIVER.StandingsTable.StandingsLists.length === 0) 
+        if ( (this.config.type === 'DRIVER' && this.ergastData.DRIVER.StandingsTable.StandingsLists.length === 0)
                 || (this.config.type != 'DRIVER' && this.ergastData.CONSTRUCTOR.StandingsTable.StandingsLists.length === 0) ) {
             var noDataWrapper = document.createElement("div");
             noDataWrapper.innerHTML = this.translate("NO DATA");
@@ -98,8 +99,8 @@ Module.register("MMM-Formula1",{
                                                                 }).join("/") : standing.Constructor.name;
             var points = standing.points;
             var wins = standing.wins;
-                                                           
-            var dataRow = this.createDataRow(driver, 
+
+            var dataRow = this.createDataRow(driver,
                                                 countryCode,
                                                 constructor,
                                                 points,
@@ -193,7 +194,7 @@ Module.register("MMM-Formula1",{
     createDataRow: function(driver, countryCode, constructor, points, wins) {
         var tr = document.createElement("tr");
         tr.className = "normal";
-        
+
         var flagCell = document.createElement("td");
         flagCell.className = "symbol light";
             var flagImg =  document.createElement("img");
@@ -214,8 +215,8 @@ Module.register("MMM-Formula1",{
         constructorCell.innerHTML = constructor;
         tr.appendChild(constructorCell);
 
-        tr.appendChild(this.createDataRowStatCell(points)); 
-        tr.appendChild(this.createDataRowStatCell(wins)); 
+        tr.appendChild(this.createDataRowStatCell(points));
+        tr.appendChild(this.createDataRowStatCell(wins));
 
         return tr;
     },
@@ -242,7 +243,7 @@ Module.register("MMM-Formula1",{
         }
         return "";
     },
-     
+
     nationalities: [
         {demonym : "Andorran", code : "AD" },
         {demonym : "Emirian", code : "AE" },
@@ -273,11 +274,11 @@ Module.register("MMM-Formula1",{
         {demonym : "Bermudan", code : "BM" },
         {demonym : "Bruneian", code : "BN" },
         {demonym : "Bolivian", code : "BO" },
-     
+
         {demonym : "Brazilian", code : "BR" },
         {demonym : "Bahameese", code : "BS" },
         {demonym : "Bhutanese", code : "BT" },
-     
+
         {demonym : "Motswana", code : "BW" },
         {demonym : "Belarusian", code : "BY" },
         {demonym : "Belizean", code : "BZ" },
@@ -324,7 +325,7 @@ Module.register("MMM-Formula1",{
         {demonym : "Grenadian", code : "GD" },
         {demonym : "Georgian", code : "GE" },
         {demonym : "French Guianese", code : "GF" },
-     
+
         {demonym : "Ghanaian", code : "GH" },
         {demonym : "Gibralterian", code : "GI" },
         {demonym : "Greenlander", code : "GL" },
@@ -333,13 +334,13 @@ Module.register("MMM-Formula1",{
         {demonym : "Guadeloupean", code : "GP" },
         {demonym : "Equatorial Guinean", code : "GQ" },
         {demonym : "Greek", code : "GR" },
-     
+
         {demonym : "Guatemalan", code : "GT" },
         {demonym : "Guamanian", code : "GU" },
         {demonym : "Guinean", code : "GW" },
         {demonym : "Guyanese", code : "GY" },
         {demonym : "Hong Konger", code : "HK" },
-     
+
         {demonym : "Honduran", code : "HN" },
         {demonym : "Croatian", code : "HR" },
         {demonym : "Haitian", code : "HT" },
@@ -349,12 +350,12 @@ Module.register("MMM-Formula1",{
         {demonym : "Israeli", code : "IL" },
         {demonym : "Manx", code : "IM" },
         {demonym : "Indian", code : "IN" },
-     
+
         {demonym : "Iraqi", code : "IQ" },
         {demonym : "Iranian", code : "IR" },
         {demonym : "Icelander", code : "IS" },
         {demonym : "Italian", code : "IT" },
-     
+
         {demonym : "Jamaican", code : "JM" },
         {demonym : "Jordanian", code : "JO" },
         {demonym : "Japanese", code : "JP" },
@@ -384,7 +385,7 @@ Module.register("MMM-Formula1",{
         {demonym : "Monacan", code : "MC" },
         {demonym : "Moldovan", code : "MD" },
         {demonym : "Montenegrin", code : "ME" },
-     
+
         {demonym : "Malagasy", code : "MG" },
         {demonym : "Marshallese", code : "MH" },
         {demonym : "Macedonian", code : "MK" },
@@ -431,7 +432,7 @@ Module.register("MMM-Formula1",{
         {demonym : "Palauan", code : "PW" },
         {demonym : "Paraguayan", code : "PY" },
         {demonym : "Qatari", code : "QA" },
-     
+
         {demonym : "Romanian", code : "RO" },
         {demonym : "Serbian", code : "RS" },
         {demonym : "Russian", code : "RU" },
@@ -444,7 +445,7 @@ Module.register("MMM-Formula1",{
         {demonym : "Singaporean", code : "SG" },
         {demonym : "Saint Helenian", code : "SH" },
         {demonym : "Slovenian", code : "SI" },
-     
+
         {demonym : "Slovakian", code : "SK" },
         {demonym : "Sierra Leonean", code : "SL" },
         {demonym : "Sanmarinese", code : "SM" },
@@ -454,12 +455,12 @@ Module.register("MMM-Formula1",{
         {demonym : "Sudanese", code : "SS" },
         {demonym : "São Tomean", code : "ST" },
         {demonym : "Salvadorean", code : "SV" },
-     
+
         {demonym : "Syrian", code : "SY" },
         {demonym : "Swazi", code : "SZ" },
         {demonym : "Turks and Caicos Islander", code : "TC" },
         {demonym : "Chadian", code : "TD" },
-     
+
         {demonym : "Togolese", code : "TG" },
         {demonym : "Thai", code : "TH" },
         {demonym : "Tajikistani", code : "TJ" },
@@ -475,11 +476,11 @@ Module.register("MMM-Formula1",{
         {demonym : "Tanzanian", code : "TZ" },
         {demonym : "Ukrainian", code : "UA" },
         {demonym : "Ugandan", code : "UG" },
-     
+
         {demonym : "American", code : "US" },
         {demonym : "Uruguayan", code : "UY" },
         {demonym : "Uzbekistani", code : "UZ" },
-     
+
         {demonym : "Saint Vincentian", code : "VC" },
         {demonym : "Venezuelan", code : "VE" },
         {demonym : "Virgin Islander", code : "VG" },
@@ -494,5 +495,5 @@ Module.register("MMM-Formula1",{
         {demonym : "Zambian", code : "ZM" },
         {demonym : "Zimbabwean", code : "ZW" }
     ]
-     
+
 });
