@@ -197,10 +197,9 @@ Module.register("MMM-Formula1",{
 
         var flagCell = document.createElement("td");
         flagCell.className = "symbol light";
-            var flagImg =  document.createElement("img");
-            flagImg.className = "flag flag-" + countryCode.toLowerCase();
-            flagImg.alt = countryCode;
-            flagCell.appendChild(flagImg);
+            var flagDiv =  document.createElement("div");
+            flagDiv.className = "flag flag-" + countryCode.toLowerCase();
+            flagCell.appendChild(flagDiv);
         tr.appendChild(flagCell);
 
         if(this.config.type === 'DRIVER'){
