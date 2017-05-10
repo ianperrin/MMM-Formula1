@@ -80,7 +80,7 @@ Module.register("MMM-Formula1",{
         }
 
         var tableWrapper = document.createElement("table");
-        tableWrapper.className = "small";
+        tableWrapper.className = "small align-left";
 
         tableWrapper.appendChild(this.createHeaderRow());
 

@@ -1,6 +1,6 @@
 .MMM-Formula1 .symbol {
-    padding-left: 10px;
-    padding-right: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .MMM-Formula1 .stat {
@@ -12,7 +12,6 @@
 .MMM-Formula1 .flag {
 	width: 16px;
 	height: 16px;
-	margin-right: 5px;
 	background:url(flags.png) no-repeat;
 	border: 0;
 	opacity: 0.6;
