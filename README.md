@@ -130,6 +130,13 @@ The following properties can be configured:
                 <br><b>Default value:</b> <code>2500</code> (2.5 seconds)
             </td>
         </tr>
+        <tr>
+            <td><code>grayscale</code></td>
+            <td><b>Optional</b> - Whether to show the flags in grayscale (<code>true</code>) or colour (<code>flase</code>)<br>
+                <br><b>Possible values:</b> <code>true</code> or <code>false</code>
+                <br><b>Default value:</b> <code>true</code> 
+            </td>
+        </tr>
     </tbody>
 </table>
 

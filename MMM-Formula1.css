@@ -16,10 +16,11 @@
 	background:url(flags.png) no-repeat;
 	border: 0;
 	opacity: 0.6;
+}
+.MMM-Formula1 .flag.grayscale {
 	filter: gray; /* IE6-9 */
 	filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
 	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
-
 }
 
 .flag.flag-ad {background-position: -16px 0}

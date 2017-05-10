@@ -16,7 +16,8 @@ Module.register("MMM-Formula1",{
         fade: true,
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
-        animationSpeed: 2.5 * 1000           // 2.5 seconds
+        animationSpeed: 2.5 * 1000,           // 2.5 seconds
+        grayscale: true
     },
 
     // Store the Ergast data in an object.
@@ -197,10 +198,10 @@ Module.register("MMM-Formula1",{
 
         var flagCell = document.createElement("td");
         flagCell.className = "symbol light";
-            var flagImg =  document.createElement("img");
-            flagImg.className = "flag flag-" + countryCode.toLowerCase();
-            flagImg.alt = countryCode;
-            flagCell.appendChild(flagImg);
+            var flagDiv =  document.createElement("div");
+            flagDiv.classList.add("flag", "flag-" + countryCode.toLowerCase());
+            if (this.config.grayscale) flagDiv.classList.add("grayscale");
+            flagCell.appendChild(flagDiv);
         tr.appendChild(flagCell);
 
         if(this.config.type === 'DRIVER'){
