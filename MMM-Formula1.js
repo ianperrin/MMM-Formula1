@@ -124,6 +124,7 @@ Module.register("MMM-Formula1",{
         }
 
         // Add season and round indicator
+        /*
         var footerTr = document.createElement('tr');
         var footerTd =  document.createElement("td");
         footerTd.className = "xsmall align-right";
@@ -131,7 +132,7 @@ Module.register("MMM-Formula1",{
         footerTd.innerHTML = "Season: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].round;
         footerTr.appendChild(footerTd);
         tableWrapper.appendChild(footerTd);
-
+        */
         return tableWrapper;
 
     },
@@ -197,10 +198,9 @@ Module.register("MMM-Formula1",{
 
         var flagCell = document.createElement("td");
         flagCell.className = "symbol light";
-            var flagImg =  document.createElement("img");
-            flagImg.className = "flag flag-" + countryCode.toLowerCase();
-            flagImg.alt = countryCode;
-            flagCell.appendChild(flagImg);
+            var flagDiv =  document.createElement("div");
+            flagDiv.className = "flag flag-" + countryCode.toLowerCase();
+            flagCell.appendChild(flagDiv);
         tr.appendChild(flagCell);
 
         if(this.config.type === 'DRIVER'){
