@@ -137,6 +137,13 @@ The following properties can be configured:
                 <br><b>Default value:</b> <code>true</code> 
             </td>
         </tr>
+        <tr>
+            <td><code>showFooter</code></td>
+            <td><b>Optional</b> - Whether to show the footer below the table with information about the season and round.<br>
+                <br><b>Possible values:</b> <code>true</code> or <code>false</code>
+                <br><b>Default value:</b> <code>true</code> 
+            </td>
+        </tr>
     </tbody>
 </table>
 

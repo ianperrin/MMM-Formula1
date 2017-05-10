@@ -17,7 +17,8 @@ Module.register("MMM-Formula1",{
         fadePoint: 0.3,
         reloadInterval: 30 * 60 * 1000,       // every 30 minutes
         animationSpeed: 2.5 * 1000,           // 2.5 seconds
-        grayscale: true
+        grayscale: true,
+        showFooter: true,
     },
 
     // Store the Ergast data in an object.
@@ -125,14 +126,15 @@ Module.register("MMM-Formula1",{
         }
 
         // Add season and round indicator
-        var footerTr = document.createElement('tr');
-        var footerTd =  document.createElement("td");
-        footerTd.className = "xsmall align-right";
-        footerTd.colSpan = tableWrapper.rows[0].cells.length;
-        footerTd.innerHTML = "Season: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].round;
-        footerTr.appendChild(footerTd);
-        tableWrapper.appendChild(footerTd);
-
+        if (this.config.showFooter) {
+            var footerTr = document.createElement('tr');
+            var footerTd =  document.createElement("td");
+            footerTd.className = "xsmall align-right";
+            footerTd.colSpan = tableWrapper.rows[0].cells.length;
+            footerTd.innerHTML = "Season: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].round;
+            footerTr.appendChild(footerTd);
+            tableWrapper.appendChild(footerTd);
+        }
         return tableWrapper;
 
     },
