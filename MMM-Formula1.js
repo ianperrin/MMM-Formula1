@@ -387,6 +387,7 @@ Module.register("MMM-Formula1",{
         {demonym : "Libyan", code : "LY" },
         {demonym : "Moroccan", code : "MA" },
         {demonym : "Monacan", code : "MC" },
+        {demonym : "Monegasque", code : "MC" },
         {demonym : "Moldovan", code : "MD" },
         {demonym : "Montenegrin", code : "ME" },
 
