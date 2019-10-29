@@ -46,9 +46,13 @@ Module.register("MMM-Formula1",{
     // Subclass start method.
     start: function() {
         Log.info("Starting module: " + this.name);
+        // Validate config options
+        this.validateConfig();
+        // Add custom filters
+        this.addFilters();
+        // Start helper and data polling
         this.sendSocketNotification("CONFIG", this.config);
     },
-
     // Subclass socketNotificationReceived method.
     socketNotificationReceived: function(notification, payload) {
         Log.info(this.name + " received a notification: " + notification);
@@ -62,192 +66,56 @@ Module.register("MMM-Formula1",{
             this.updateDom(this.config.animationSpeed);
         }
     },
-
-    // Override dom generator.
-    getDom: function() {
-
-        if (this.loading) {
-            var loadingWrapper = document.createElement("div");
-            loadingWrapper.innerHTML = this.translate("LOADING");
-            loadingWrapper.className = "small dimmed light";
-            return loadingWrapper;
-        }
-
-        if ( (this.config.type === 'DRIVER' && this.ergastData.DRIVER.StandingsTable.StandingsLists.length === 0)
-                || (this.config.type != 'DRIVER' && this.ergastData.CONSTRUCTOR.StandingsTable.StandingsLists.length === 0) ) {
-            var noDataWrapper = document.createElement("div");
-            noDataWrapper.innerHTML = this.translate("NO DATA");
-            noDataWrapper.className = "small dimmed light";
-            return noDataWrapper;
-        }
-
-        var tableWrapper = document.createElement("table");
-        tableWrapper.className = "small align-left";
-
-        tableWrapper.appendChild(this.createHeaderRow());
-
-        // Add row to table for each driver in the standings.
-        var standings = this.config.type === 'DRIVER' ? this.ergastData.DRIVER.StandingsTable.StandingsLists[0].DriverStandings : this.ergastData.CONSTRUCTOR.StandingsTable.StandingsLists[0].ConstructorStandings;
-        var rowsToDisplay = (this.config.maxRows) ? Math.min(this.config.maxRows, standings.length) : standings.length;
-        for (i = 0; i < rowsToDisplay; i++) {
-            var standing = standings[i];
-
-            var driver;
-            if(this.config.type === 'DRIVER'){
-                driver = [standing.Driver.givenName, standing.Driver.familyName].join(" ");
+    getTemplate: function () {
+        return "templates\\mmm-formula1-standings.njk";
+    },
+    getTemplateData: function () {
+        var templateData = {
+            loading: this.loading,
+            config: this.config,
+            standings: null,
+            identifier: this.identifier,
+            timeStamp: this.dataRefreshTimeStamp
+        };
+        if (!this.loading && this.ergastData && this.ergastData[this.config.type].StandingsTable.StandingsLists.length > 0) {
+            var standingsLists = this.ergastData[this.config.type].StandingsTable.StandingsLists[0];
+            templateData.standings = this.config.type === "DRIVER" ? standingsLists.DriverStandings : standingsLists.ConstructorStandings;
+            templateData.season = standingsLists.season;
+            templateData.round = standingsLists.round;
+            if(this.config.maxRows) {
+                templateData.standings = templateData.standings.slice(0, this.config.maxRows)
             }
-            var countryCode = this.getCodeFromNationality(standing[this.config.type === 'DRIVER' ? 'Driver' : 'Constructor'].nationality);
-            var constructor = this.config.type === 'DRIVER' ? standing.Constructors.map(function(elem){
-                                                                    return elem.name;
-                                                                }).join("/") : standing.Constructor.name;
-            var points = standing.points;
-            var wins = standing.wins;
-
-            var dataRow = this.createDataRow(driver,
-                                                countryCode,
-                                                constructor,
-                                                points,
-                                                wins);
-
-            // Create fade effect.
-            if (this.config.fade && this.config.fadePoint < 1) {
-                if (this.config.fadePoint < 0) {
-                    this.config.fadePoint = 0;
-                }
-                var startingPoint = rowsToDisplay * this.config.fadePoint;
-                var steps = rowsToDisplay - startingPoint;
-                if (i >= startingPoint) {
-                    var currentStep = i - startingPoint;
-                    dataRow.style.opacity = 1 - (1 / steps * currentStep);
-                }
-            }
-
-            tableWrapper.appendChild(dataRow);
-
         }
-
-        // Add season and round indicator
-        if (this.config.showFooter) {
-            var footerTr = document.createElement('tr');
-            var footerTd =  document.createElement("td");
-            footerTd.className = "xsmall align-right";
-            footerTd.colSpan = tableWrapper.rows[0].cells.length;
-            footerTd.innerHTML = "Season: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].season + ", Round: " + this.ergastData[this.config.type].StandingsTable.StandingsLists[0].round;
-            footerTr.appendChild(footerTd);
-            tableWrapper.appendChild(footerTd);
+        return templateData;
+    },
+    validateConfig: function() {
+        // Validate module type
+        var validTypes = ["DRIVER","CONSTRUCTOR"];
+        if (validTypes.indexOf(this.config.type.toUpperCase()) == -1) {
+            this.config.type = "DRIVER";
         }
-        return tableWrapper;
-
     },
-
-    /**
-     * createHeaderRow
-     * This method creates a table row for the headings.
-     * @return {dom object}                    the table row (tr)
-     */
-    createHeaderRow: function() {
-        var tr = document.createElement('tr');
-        tr.className = "normal";
-
-        var flagTd =  document.createElement("td");
-        tr.appendChild(flagTd);
-
-        if(this.config.type === 'DRIVER'){
-            var driverTd =  document.createElement("td");
-            driverTd.innerHTML = this.translate("DRIVER");
-            tr.appendChild(driverTd);
+    addFilters() {
+        var env = this.nunjucksEnvironment();
+        env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
+        env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
+    },
+    getFadeOpacity: function(index, itemCount) {
+        var fadeStart = itemCount * this.config.fadePoint;
+        var fadeItemCount = itemCount - fadeStart + 1;
+        if (this.config.fade && index > fadeStart) {
+             return 1- ((index - fadeStart) / fadeItemCount);
+        } else {
+            return 1;
         }
-
-        var constructorTd =  document.createElement("td");
-        constructorTd.innerHTML = this.translate("CONSTRUCTOR");
-        tr.appendChild(constructorTd);
-
-        tr.appendChild(this.createHeaderRowIconCell("line-chart"));    // Points
-        tr.appendChild(this.createHeaderRowIconCell("trophy"));        // Wins
-
-        return tr;
     },
-
-    /**
-     * createHeaderRowIconCell
-     * This method creates a table cell containing the supplied font awesome icon.
-     * @param  {string} icon                the font awesome icon. (without 'fa-')
-     * @return {dom object}                    the table cell (td)
-     */
-    createHeaderRowIconCell: function(icon) {
-
-        var td =  document.createElement("td");
-        td.className = "light symbol align-right stat";
-        var tdIcon =  document.createElement("span");
-        tdIcon.className = "fa fa-" + icon;
-        td.appendChild(tdIcon);
-
-        return td;
-    },
-
-    /**
-     * createDataRow
-     * This method creates a table row with stats for an activity.
-     * @param  {string} driver                the name of the driver
-     * @param  {string} countryCode           the 2-digit country code for the drivers nationality
-     * @param  {string} constructor           the name of the constructor
-     * @param  {number} points                the number of points
-     * @param  {number} wins                  the number of wins
-     * @return {dom object}                   the table row (tr)
-     */
-    createDataRow: function(driver, countryCode, constructor, points, wins) {
-        var tr = document.createElement("tr");
-        tr.className = "normal";
-
-        var flagCell = document.createElement("td");
-        flagCell.className = "symbol light";
-            var flagDiv =  document.createElement("div");
-            flagDiv.classList.add("flag", "flag-" + countryCode.toLowerCase());
-            if (this.config.grayscale) flagDiv.classList.add("grayscale");
-            flagCell.appendChild(flagDiv);
-        tr.appendChild(flagCell);
-
-        if(this.config.type === 'DRIVER'){
-            var driverCell = document.createElement("td");
-            driverCell.className = "title bright";
-            driverCell.innerHTML = driver;
-            tr.appendChild(driverCell);
-        }
-
-        var constructorCell = document.createElement("td");
-        constructorCell.className = this.config.type === 'DRIVER' ? "title light" : "title bright";
-        constructorCell.innerHTML = constructor;
-        tr.appendChild(constructorCell);
-
-        tr.appendChild(this.createDataRowStatCell(points));
-        tr.appendChild(this.createDataRowStatCell(wins));
-
-        return tr;
-    },
-
-    /**
-     * createDataRowStatCell
-     * This method creates a table cell containing the supplied HTML.
-     * @param  {string} innerHTML            the contents of the cell
-     * @return {dom object}                    the table cell (td)
-     */
-    createDataRowStatCell: function(innerHTML) {
-
-        var td =  document.createElement("td");
-        td.className = "bright align-right stat";
-        td.innerHTML = innerHTML;
-
-        return td;
-    },
-
     getCodeFromNationality: function(nationality) {
         for(var i = 0, len = this.nationalities.length; i < len; i++) {
             if (this.nationalities[i].demonym === nationality)
-                return this.nationalities[i].code;
+                return this.nationalities[i].code.toLowerCase();
         }
         return "";
     },
-
     nationalities: [
         {demonym : "Andorran", code : "AD" },
         {demonym : "Emirian", code : "AE" },

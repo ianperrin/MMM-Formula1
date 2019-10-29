@@ -1,0 +1,50 @@
+{% if loading %}
+    <div class="small dimmed light">
+        {{ "LOADING" | translate | safe }}
+    </div>
+{% elif standings.length === 0 %}
+    <div class="small dimmed light">
+        {{ "NO DATA" | translate | safe }}
+    </div>
+{% else %}
+    <table class="small align-left">
+        <thead>
+            <tr class="normal">
+                <td></td>
+                {% if (config.type === "DRIVER") %}
+                <td>{{ "DRIVER" | translate }}</td>
+                {% endif %}
+                <td>{{ "CONSTRUCTOR" | translate }}</td>
+                <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
+                <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for standing in standings %}
+            <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
+                {% if (config.type === "DRIVER") %}
+                <td class="symbol light">
+                    <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
+                </td>
+                <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}</td>
+                <td class="title light">{{ standing.Constructors | join (",", "name") }}</td>
+                {% else %}
+                <td class="symbol">
+                    <div class="flag flag-{{ standing.Constructor.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
+                </td>
+                <td class="title bright">{{ standing.Constructor.name }}</td>
+                {% endif %}
+                <td class="bright align-right stat">{{ standing.points }}</td>
+                <td class="bright align-right stat">{{ standing.wins }}</td>
+            </tr>
+            {% endfor %}
+            {% if (config.showFooter) %}
+        </tbody>
+        </tfoot>
+            <tr>
+                <td class="xsmall align-right" colspan="5">Season: {{ season }}, Round: {{ round }}</td>
+            </tr>
+        </tfoot>
+        {% endif %}
+    </table>
+{% endif %}
