@@ -46,12 +46,13 @@ Module.register("MMM-Formula1",{
     // Subclass start method.
     start: function() {
         Log.info("Starting module: " + this.name);
+        // Validate config options
+        this.validateConfig();
         // Add custom filters
         this.addFilters();
         // Start helper and data polling
         this.sendSocketNotification("CONFIG", this.config);
     },
-
     // Subclass socketNotificationReceived method.
     socketNotificationReceived: function(notification, payload) {
         Log.info(this.name + " received a notification: " + notification);
@@ -86,6 +87,13 @@ Module.register("MMM-Formula1",{
             }
         }
         return templateData;
+    },
+    validateConfig: function() {
+        // Validate module type
+        var validTypes = ["DRIVER","CONSTRUCTOR"];
+        if (validTypes.indexOf(this.config.type.toUpperCase()) == -1) {
+            this.config.type = "DRIVER";
+        }
     },
     addFilters() {
         var env = this.nunjucksEnvironment();
