@@ -2,6 +2,12 @@
 
 A MagicMirror Module for displaying Formula 1 standings and race schedule.
 
+[![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
+[![License](https://img.shields.io/badge/license-MIT-informational)](https://raw.githubusercontent.com/ianperrin/MMM-Formula1/master/LICENSE)
+[![Build Status](https://travis-ci.org/ianperrin/MMM-Formula1.svg?branch=master)](https://travis-ci.org/ianperrin/MMM-Formula1)
+[![Code Climate](https://codeclimate.com/github/ianperrin/MMM-Formula1/badges/gpa.svg)](https://codeclimate.com/github/ianperrin/MMM-Formula1)
+[![Known Vulnerabilities](https://snyk.io/test/github/ianperrin/MMM-Formula1/badge.svg)](https://snyk.io/test/github/ianperrin/MMM-Formula1)
+
 ## Example
 
 ![Example screenshot](.github/example.png)
