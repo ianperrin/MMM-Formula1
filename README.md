@@ -71,15 +71,15 @@ The following properties can be configured:
 
 | **Option** | **Default** | **Description** | **Possible Values** |
 | --- | --- | --- | --- |
-| `season` | `current` | *Optional* - The season to display. | `1950` - `2016` |
-| `type` | `'DRIVER'` | *Optional* - The type of standings to display. | `'DRIVER'` or `'CONSTRUCTOR'` |
+| `season` | `current` | *Optional* - The season to display. | `current` = Standings for the current season, or a year (greater than or equal to `1950`) = Standings for a specific season. |
+| `type` | `DRIVER` | *Optional* - The type of standings to display. | `DRIVER` or `CONSTRUCTOR` |
 | `maxRows` | `false` | *Optional* - The maximum number of drivers/constructors to show in the standings table. |  `false` or a `number`. |
 | `calendar` | `false` | *Optional* - Whether the module should publish the upcoming Race Schedule as an ical. | `true` or `false`. |
-| `fade` | `false` | *Optional* - Whether to fade the activities to black (Gradient). | `true` or `false` |
+| `fade` | `true` | *Optional* - Whether to fade the activities to black (Gradient). | `true` or `false` |
 | `fadePoint` | `0.4` | *Optional* - Where to start fade? |  `0` (top of the list) - `1` (bottom of list) |
 | `reloadInterval` | `1800000` (30 minutes) | *Optional* - How often does the data needs to be reloaded from the API? (Milliseconds). See the [Terms & Conditions](http://ergast.com/mrd/terms/) for responsible use of the API. |  `7500` - `86400000` |
 | `animationSpeed` | `2500` (2.5 seconds) | *Optional* - The speed of the update animation. (Milliseconds). | `0` - `5000` |
-| `grayscale` | `true` | *Optional* - Whether to show the flags in grayscale (`true`) or colour (`flase`). |  `true` or `false` |
+| `grayscale` | `true` | *Optional* - Whether to show the flags in grayscale (`true`) or colour (`false`). |  `true` or `false` |
 | `showFooter` | `true` | *Optional* - Whether to show the footer below the table with information about the season and round. |  `true` or `false` |
 
 ### Displaying the Race Schedule
