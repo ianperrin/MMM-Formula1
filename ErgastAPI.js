@@ -1,15 +1,15 @@
-var http = require('http');
-//var https = require('https');
-var querystring = require('querystring');
-var extend = require('util')._extend;
+var http = require("http");
+//var https = require("https");
+//var querystring = require("querystring");
+var extend = require("util")._extend;
 
 var ErgastAPI = (function() {
 
     var self = this;
 
     // Private Properties
-    var HOST = 'ergast.com';
-    var API = '/api/f1/';
+    var HOST = "ergast.com";
+    var API = "/api/f1/";
     var PORT = 80;
 
     var standings = {
@@ -31,12 +31,12 @@ var ErgastAPI = (function() {
         var defaultOptions = {
             host: HOST,
             port: PORT,
-            path: '/',
-            method: 'GET', // GET | POST
+            path: "/",
+            method: "GET", // GET | POST
             parameters: {},
-            body: '',
+            body: "",
             callback: function(){},
-            contentType: 'application/json',
+            contentType: "application/json",
             agent: false,
             headers: { }
         };
@@ -47,28 +47,28 @@ var ErgastAPI = (function() {
 
         // Update Content-Type header
         options.headers  = extend(options.headers, {
-            'Content-Type' : options.contentType
+            "Content-Type" : options.contentType
         });
 
         // Encode body if contentType is json.
-        if (options.contentType === 'application/json') {
+        if (options.contentType === "application/json") {
             options.body = JSON.stringify(options.body);
         }
 
         //console.log(options);
 
         var request = http.request(options, function(response) {
-            response.setEncoding('utf8');
+            response.setEncoding("utf8");
 
-            var str = '';
+            var str = "";
 
             //another chunk of data has been recieved, so append it to `str`
-            response.on('data', function (chunk) {
+            response.on("data", function (chunk) {
                 str += chunk;
             });
 
             //the whole response has been recieved, so we just print it out here
-            response.on('end', function () {
+            response.on("end", function () {
                 if (response.statusCode === 200) {
                     if (str.length > 0) {
                         options.callback(JSON.parse(str));
@@ -103,8 +103,8 @@ var ErgastAPI = (function() {
                 }
             });
 
-            response.on('error', function(e) {
-                console.log("Error performing request to endpoint: /" + endpoint);
+            response.on("error", function(e) {
+                console.log("Error performing request to endpoint: /" + options.path);
                 options.callback();
             });
         });
@@ -120,7 +120,7 @@ var ErgastAPI = (function() {
     function makeApiRequest(options) {
 
         options = extend(options, {
-                path: API + options.path
+            path: API + options.path
         });
 
         makeRequest(options);
@@ -150,7 +150,7 @@ var ErgastAPI = (function() {
      * http://ergast.com/api/f1/{season}/{type}.json
      */
     self.getStandings = function(season, type, callback) {
-        makeSimpleApiRequest(season + '/' + type + '.json', function(data) {
+        makeSimpleApiRequest(season + "/" + type + ".json", function(data) {
             if (!data) {
                 console.log("Error while fetching driver standings.");
                 callback(standings[type]);
@@ -176,7 +176,7 @@ var ErgastAPI = (function() {
      * http://ergast.com/api/f1/current.json
      */
     self.getSchedule = function(season, callback) {
-        makeSimpleApiRequest(season + '.json', function(data) {
+        makeSimpleApiRequest(season + ".json", function(data) {
             if (!data) {
                 console.log("Error while fetching race schedule.");
                 callback(schedule);

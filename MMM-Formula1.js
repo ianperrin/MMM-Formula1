@@ -5,12 +5,14 @@
  * MIT Licensed.
  */
 
+/* global Module, Log */
+
 Module.register("MMM-Formula1",{
 
     // Default module config.
     defaults: {
-        season: 'current',
-        type: 'DRIVER',
+        season: "current",
+        type: "DRIVER",
         maxRows: false,
         calendar: false,
         fade: true,
@@ -29,17 +31,17 @@ Module.register("MMM-Formula1",{
 
     // Subclass getStyles method.
     getStyles: function() {
-        return ['font-awesome.css','MMM-Formula1.css'];
+        return ["font-awesome.css","MMM-Formula1.css"];
     },
 
     // Subclass getTranslations method.
     getTranslations: function() {
         return {
-                en: "translations/en.json",
-                nl: "translations/nl.json",
-                de: "translations/de.json",
-                id: "translations/id.json",
-                sv: "translations/sv.json"
+            en: "translations/en.json",
+            nl: "translations/nl.json",
+            de: "translations/de.json",
+            id: "translations/id.json",
+            sv: "translations/sv.json"
         };
     },
 
@@ -83,7 +85,7 @@ Module.register("MMM-Formula1",{
             templateData.season = standingsLists.season;
             templateData.round = standingsLists.round;
             if(this.config.maxRows) {
-                templateData.standings = templateData.standings.slice(0, this.config.maxRows)
+                templateData.standings = templateData.standings.slice(0, this.config.maxRows);
             }
         }
         return templateData;
@@ -104,15 +106,16 @@ Module.register("MMM-Formula1",{
         var fadeStart = itemCount * this.config.fadePoint;
         var fadeItemCount = itemCount - fadeStart + 1;
         if (this.config.fade && index > fadeStart) {
-             return 1- ((index - fadeStart) / fadeItemCount);
+            return 1- ((index - fadeStart) / fadeItemCount);
         } else {
             return 1;
         }
     },
     getCodeFromNationality: function(nationality) {
         for(var i = 0, len = this.nationalities.length; i < len; i++) {
-            if (this.nationalities[i].demonym === nationality)
+            if (this.nationalities[i].demonym === nationality) {
                 return this.nationalities[i].code.toLowerCase();
+            }
         }
         return "";
     },
