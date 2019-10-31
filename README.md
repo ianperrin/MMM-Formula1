@@ -167,7 +167,7 @@ Set the `calendar` option for your MMM-Formula1 module to true.
 Add the Formula 1 Race Schedule calendar to the `calendar` module to your configuration (`config/config.js`).
 ```
 {
-    symbol: ' flag-checkered',
+    symbol: 'flag-checkered',
     url: 'http://localhost:8080/MMM-Formula1/schedule.ics',
 }
 ```
