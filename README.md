@@ -1,11 +1,13 @@
 # MagicMirror Module: MMM-Formula1
+
 A MagicMirror Module for displaying Formula 1 standings and race schedule.
 
 ## Example
 
-![](.github/example.png)
+![Example screenshot](.github/example.png)
 
-### The module displays the standings from the current Formula 1 season including:
+### The module displays the current Formula 1 standings table from the selected season with the following information
+
 * The flag for the driver or constructor.
 * The drivers name (when the drivers standings are displayed).
 * The constructor name.
@@ -13,21 +15,23 @@ A MagicMirror Module for displaying Formula 1 standings and race schedule.
 * The current number of wins.
 
 ### In addition you can configure the following options
+
 * Which season to display the standings for `season`
 * Whether to show the drivers or constructors standings `type`
 * How many drivers/constructors to display in the standings table `maxRows`
 * Display the upcoming race schedule using the standard [calendar](https://github.com/MichMich/MagicMirror/tree/develop/modules/default/calendar) module
 
-
 ## Installation
 
 In your terminal, go to your MagicMirror's Module folder:
-````
+
+````bash
 cd ~/MagicMirror/modules
 ````
 
 Clone this repository:
-````
+
+````bash
 git clone https://github.com/ianperrin/MMM-Formula1.git
 ````
 
@@ -37,16 +41,17 @@ Configure the module in your `config/config.js` file.
 
 If you want to update your MMM-Formula1 module to the latest version, use your terminal to go to your MMM-Formula1 module folder and type the following command:
 
-````
+````bash
 git pull
-```` 
+````
 
-If you haven't changed the modules, this should work without any problems. 
+If you haven't changed the modules, this should work without any problems.
 Type `git status` to see your changes, if there are any, you can reset them with `git reset --hard`. After that, git pull should be possible.
 
 ## Using the module
 
 To use this module, add it to the modules array in the `config/config.js` file:
+
 ````javascript
 modules: [
     {
@@ -63,7 +68,6 @@ modules: [
 ## Configuration options
 
 The following properties can be configured:
-
 
 <table width="100%">
     <!-- why, markdown... -->
@@ -134,44 +138,54 @@ The following properties can be configured:
             <td><code>grayscale</code></td>
             <td><b>Optional</b> - Whether to show the flags in grayscale (<code>true</code>) or colour (<code>flase</code>)<br>
                 <br><b>Possible values:</b> <code>true</code> or <code>false</code>
-                <br><b>Default value:</b> <code>true</code> 
+                <br><b>Default value:</b> <code>true</code>
             </td>
         </tr>
         <tr>
             <td><code>showFooter</code></td>
             <td><b>Optional</b> - Whether to show the footer below the table with information about the season and round.<br>
                 <br><b>Possible values:</b> <code>true</code> or <code>false</code>
-                <br><b>Default value:</b> <code>true</code> 
+                <br><b>Default value:</b> <code>true</code>
             </td>
         </tr>
     </tbody>
 </table>
 
 ### Displaying the Race Schedule
+
 Stop your Magic Mirror (your exact method may vary)
-````
+
+````bash
 pm2 stop mm
 ````
+
 Install `ical-generator` in your MMM-Formula1 module directory.
-````
+
+````bash
 cd ~/MagicMirror/modules/MMM-Formula1
 npm install ical-generator
 ````
+
 Set the `calendar` option for your MMM-Formula1 module to true.
-````
+
+````javascript
         config: {
             // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
             calendar: true,
         }
-```` 
+````
+
 Add the Formula 1 Race Schedule calendar to the `calendar` module to your configuration (`config/config.js`).
-```
+
+````javascript
 {
     symbol: 'flag-checkered',
     url: 'http://localhost:8080/MMM-Formula1/schedule.ics',
 }
-```
-Restart your Magic Mirror (your exact method may vary)
 ````
+
+Restart your Magic Mirror (your exact method may vary)
+
+````bash
 pm2 start mm
 ````
