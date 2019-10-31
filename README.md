@@ -69,87 +69,18 @@ modules: [
 
 The following properties can be configured:
 
-<table width="100%">
-    <!-- why, markdown... -->
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th width="100%">Description</th>
-        </tr>
-    <thead>
-    <tbody>
-        <tr>
-            <td><code>season</code></td>
-            <td><b>Optional</b> - The season to display.<br>
-                <br><b>Possible values:</b><code>1950</code> - <code>2016</code>
-                <br><b>Default value:</b> <code>'current'</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>type</code></td>
-            <td><b>Optional</b> - The type of standings to display.<br>
-                <br><b>Possible values:</b><code>'DRIVER'</code> or <code>'CONSTRUCTOR'</code>
-                <br><b>Default value:</b> <code>'DRIVER'</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>maxRows</code></td>
-            <td><b>Optional</b> - The maximum number of drivers/constructors to show in the standings table.<br>
-                <br><b>Possible values:</b> <code>false</code> or a <code>number</code>.
-                <br><b>Default value:</b> <code>false</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>calendar</code></td>
-            <td><b>Optional</b> - Whether the module should publish the upcoming Race Schedule as an ical.<br>
-                <br><b>Possible values:</b> <code>true</code> or <code>false</code>.
-                <br><b>Default value:</b> <code>false</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>fade</code></td>
-            <td><b>Optional</b> - Whether to fade the activities to black. (Gradient)<br>
-                <br><b>Possible values:</b> <code>true</code> or <code>false</code>
-                <br><b>Default value:</b> <code>false</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>fadePoint</code></td>
-            <td><b>Optional</b> - Where to start fade?<br>
-                <br><b>Possible values:</b> <code>0</code> (top of the list) - <code>1</code> (bottom of list)
-                <br><b>Default value:</b> <code>0.4</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>reloadInterval</code></td>
-            <td><b>Optional</b> - How often does the data needs to be reloaded from the API? (Milliseconds). See the <a href="http://ergast.com/mrd/terms/">Terms &amp; Conditions</a> for responsible use of the API.<br>
-                <br><b>Possible values:</b> <code>7500</code> - <code>86400000</code>
-                <br><b>Default value:</b> <code>1800000</code> (30 minutes)
-            </td>
-        </tr>
-        <tr>
-            <td><code>animationSpeed</code></td>
-            <td><b>Optional</b> - The speed of the update animation. (Milliseconds)<br>
-                <br><b>Possible values:</b><code>0</code> - <code>5000</code>
-                <br><b>Default value:</b> <code>2500</code> (2.5 seconds)
-            </td>
-        </tr>
-        <tr>
-            <td><code>grayscale</code></td>
-            <td><b>Optional</b> - Whether to show the flags in grayscale (<code>true</code>) or colour (<code>flase</code>)<br>
-                <br><b>Possible values:</b> <code>true</code> or <code>false</code>
-                <br><b>Default value:</b> <code>true</code>
-            </td>
-        </tr>
-        <tr>
-            <td><code>showFooter</code></td>
-            <td><b>Optional</b> - Whether to show the footer below the table with information about the season and round.<br>
-                <br><b>Possible values:</b> <code>true</code> or <code>false</code>
-                <br><b>Default value:</b> <code>true</code>
-            </td>
-        </tr>
-    </tbody>
-</table>
+| **Option** | **Default** | **Description** | **Possible Values** |
+| --- | --- | --- | --- |
+| `season` | `current` | *Optional* - The season to display. | `1950` - `2016` |
+| `type` | `'DRIVER'` | *Optional* - The type of standings to display. | `'DRIVER'` or `'CONSTRUCTOR'` |
+| `maxRows` | `false` | *Optional* - The maximum number of drivers/constructors to show in the standings table. |  `false` or a `number`. |
+| `calendar` | `false` | *Optional* - Whether the module should publish the upcoming Race Schedule as an ical. | `true` or `false`. |
+| `fade` | `false` | *Optional* - Whether to fade the activities to black (Gradient). | `true` or `false` |
+| `fadePoint` | `0.4` | *Optional* - Where to start fade? |  `0` (top of the list) - `1` (bottom of list) |
+| `reloadInterval` | `1800000` (30 minutes) | *Optional* - How often does the data needs to be reloaded from the API? (Milliseconds). See the [Terms & Conditions](http://ergast.com/mrd/terms/) for responsible use of the API. |  `7500` - `86400000` |
+| `animationSpeed` | `2500` (2.5 seconds) | *Optional* - The speed of the update animation. (Milliseconds). | `0` - `5000` |
+| `grayscale` | `true` | *Optional* - Whether to show the flags in grayscale (`true`) or colour (`flase`). |  `true` or `false` |
+| `showFooter` | `true` | *Optional* - Whether to show the footer below the table with information about the season and round. |  `true` or `false` |
 
 ### Displaying the Race Schedule
 
@@ -169,10 +100,10 @@ npm install ical-generator
 Set the `calendar` option for your MMM-Formula1 module to true.
 
 ````javascript
-        config: {
-            // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
-            calendar: true,
-        }
+config: {
+    // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
+    calendar: true,
+}
 ````
 
 Add the Formula 1 Race Schedule calendar to the `calendar` module to your configuration (`config/config.js`).
