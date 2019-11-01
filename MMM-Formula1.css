@@ -1,5 +1,9 @@
+.MMM-Formula1 table {
+    border-spacing: 5px 0;
+    border-collapse: separate;
+}
+
 .MMM-Formula1 .symbol {
-  padding-left: 5px;
   padding-right: 5px;
 }
 
