@@ -152,7 +152,7 @@ var ErgastAPI = (function() {
     self.getStandings = function(season, type, callback) {
         makeSimpleApiRequest(season + "/" + type + ".json", function(data) {
             if (!data) {
-                console.log("Error while fetching driver standings.");
+                console.log("Error while fetching Formula1 standings.");
                 callback(standings[type]);
                 return;
             }
