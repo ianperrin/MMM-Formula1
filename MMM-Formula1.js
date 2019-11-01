@@ -58,7 +58,7 @@ Module.register("MMM-Formula1",{
             // Parse JSON string into object
             self.nationalities = JSON.parse(response);
             // Start helper and data polling
-            self.sendSocketNotification("CONFIG", this.config);
+            self.sendSocketNotification("CONFIG", self.config);
         });
     },
     // Subclass socketNotificationReceived method.
