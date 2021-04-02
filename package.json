@@ -1,15 +1,15 @@
 {
 	"name": "MMM-Formula1",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"description": "A Formula 1 module for the Magic Mirror.",
 	"scripts": {
 		"test": "npm run test:unit && npm run test:prettier && npm run test:js && npm run test:css",
 		"test:unit": "NODE_ENV=test mocha tests --recursive",
 		"test:prettier": "prettier --check **/*.{js,css,json,md,yml}",
-		"test:js": "eslint *.js tests/**/*.js --config .eslintrc.json --quiet",
+		"test:js": "eslint *.js --config .eslintrc.json --quiet",
 		"test:css": "stylelint **/*.css --config .stylelintrc.json",
 		"lint:prettier": "prettier --write **/*.{js,css,json,md,yml}",
-		"lint:js": "eslint *.js tests/**/*.js --config .eslintrc.json --fix",
+		"lint:js": "eslint *.js --config .eslintrc.json --fix",
 		"lint:css": "stylelint **/*.css --config .stylelintrc.json --fix"
 	},
 	"repository": {
