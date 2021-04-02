@@ -1,40 +1,49 @@
 {
-  "name": "MMM-Formula1",
-  "version": "1.2.2",
-  "description": "A Formula 1 module for the Magic Mirror.",
-  "scripts": {
-    "lint": "grunt lint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ianperrin/MMM-Formula1"
-  },
-  "keywords": [
-    "magic mirror",
-    "smart mirror",
-    "Formula1",
-    "module"
-  ],
-  "author": "Ian Perrin",
-  "contributors": "https://github.com/ianperrin/MMM-Formula1/graphs/contributors",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ianperrin/MMM-Formula1/issues"
-  },
-  "homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
-  "dependencies": {
-    "ical-generator": "^1.8.2"
-  },
-  "devDependencies": {
-    "grunt": "^1.0.4",
-    "grunt-contrib-jshint": "^2.1.0",
-    "grunt-eslint": "^22.0.0",
-    "grunt-jsonlint": "^2.0.0",
-    "grunt-markdownlint": "^2.7.0",
-    "grunt-stylelint": "^0.12.0",
-    "grunt-yamllint": "^0.3.0",
-    "load-grunt-config": "^3.0.1",
-    "stylelint": "^11.1.1",
-    "stylelint-config-standard": "^19.0.0"
-  }
+	"name": "MMM-Formula1",
+	"version": "1.3.0",
+	"description": "A Formula 1 module for the Magic Mirror.",
+	"scripts": {
+		"test": "npm run test:unit && npm run test:prettier && npm run test:js && npm run test:css",
+		"test:unit": "NODE_ENV=test mocha tests --recursive",
+		"test:prettier": "prettier --check **/*.{js,css,json,md,yml}",
+		"test:js": "eslint *.js tests/**/*.js --config .eslintrc.json --quiet",
+		"test:css": "stylelint **/*.css --config .stylelintrc.json",
+		"lint:prettier": "prettier --write **/*.{js,css,json,md,yml}",
+		"lint:js": "eslint *.js tests/**/*.js --config .eslintrc.json --fix",
+		"lint:css": "stylelint **/*.css --config .stylelintrc.json --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ianperrin/MMM-Formula1"
+	},
+	"keywords": [
+		"magic mirror",
+		"smart mirror",
+		"Formula1",
+		"module"
+	],
+	"author": "Ian Perrin",
+	"contributors": "https://github.com/ianperrin/MMM-Formula1/graphs/contributors",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ianperrin/MMM-Formula1/issues"
+	},
+	"homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"eslint": "^7.15.0",
+		"eslint-config-prettier": "^7.0.0",
+		"eslint-plugin-jsdoc": "^30.7.8",
+		"eslint-plugin-prettier": "^3.2.0",
+		"mocha": "^8.2.1",
+		"module-alias": "^2.2.2",
+		"prettier": "^2.2.1",
+		"stylelint": "^13.8.0",
+		"stylelint-config-prettier": "^8.0.2",
+		"stylelint-config-standard": "^20.0.0",
+		"stylelint-prettier": "^1.1.2"
+	},
+	"dependencies": {
+		"ical-generator": "^1.8.2"
+	}
 }
