@@ -1,4 +1,6 @@
 {
 	"DRIVER": "Förare",
-	"CONSTRUCTOR": "Tillverkare"
+	"CONSTRUCTOR": "Tillverkare",
+	"SEASON": "Säsong",
+	"ROUND": "Runda"
 }

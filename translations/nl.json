@@ -1,4 +1,6 @@
 {
 	"DRIVER": "Driver",
-	"CONSTRUCTOR": "Constructor"
+	"CONSTRUCTOR": "Constructor",
+	"SEASON": "Seizoen",
+	"ROUND": "Ronde"
 }

@@ -1,4 +1,6 @@
 {
 	"DRIVER": "Pembalap",
-	"CONSTRUCTOR": "Tim"
+	"CONSTRUCTOR": "Tim",
+	"SEASON": "Musim",
+	"ROUND": "Bulat"
 }
