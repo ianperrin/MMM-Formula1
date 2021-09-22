@@ -45,6 +45,6 @@
 	},
 	"dependencies": {
 		"f1-api": "^1.2.0",
-		"ical-generator": "^1.8.2"
+		"ical-generator": "^3.0.0"
 	}
 }

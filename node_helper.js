@@ -64,7 +64,6 @@ module.exports = NodeHelper.create({
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {
 			if (raceSchedule) {
-				console.log(this.name + " is returning the race schedule for the " + this.config.season + " season");
 				raceScheduleDB = raceSchedule;
 				this.sendSocketNotification("RACE_SCHEDULE", raceSchedule);
 			}
