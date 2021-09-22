@@ -44,6 +44,7 @@
 		"stylelint-prettier": "^1.1.2"
 	},
 	"dependencies": {
+		"f1-api": "^1.2.0",
 		"ical-generator": "^1.8.2"
 	}
 }

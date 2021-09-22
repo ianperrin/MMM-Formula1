@@ -62,12 +62,8 @@ Module.register("MMM-Formula1", {
 	// Subclass socketNotificationReceived method.
 	socketNotificationReceived: function (notification, payload) {
 		Log.info(this.name + " received a notification: " + notification);
-		if (notification === "DRIVER_STANDINGS") {
-			this.ergastData.DRIVER = payload.MRData;
-			this.loading = false;
-			this.updateDom(this.config.animationSpeed);
-		} else if (notification === "CONSTRUCTOR_STANDINGS") {
-			this.ergastData.CONSTRUCTOR = payload.MRData;
+		if (["DRIVER_STANDINGS", "CONSTRUCTOR_STANDINGS"].indexOf(notification) >= 0) {
+			this.ergastData = payload;
 			this.loading = false;
 			this.updateDom(this.config.animationSpeed);
 		}
@@ -79,17 +75,13 @@ Module.register("MMM-Formula1", {
 		var templateData = {
 			loading: this.loading,
 			config: this.config,
-			standings: null,
+			data: this.loading ? null : this.ergastData,
 			identifier: this.identifier,
 			timeStamp: this.dataRefreshTimeStamp
 		};
-		if (!this.loading && this.ergastData && this.ergastData[this.config.type].StandingsTable.StandingsLists.length > 0) {
-			var standingsLists = this.ergastData[this.config.type].StandingsTable.StandingsLists[0];
-			templateData.standings = this.config.type === "DRIVER" ? standingsLists.DriverStandings : standingsLists.ConstructorStandings;
-			templateData.season = standingsLists.season;
-			templateData.round = standingsLists.round;
+		if (!this.loading && templateData.data && templateData.data.standings && templateData.data.standings.length > 0) {
 			if (this.config.maxRows) {
-				templateData.standings = templateData.standings.slice(0, this.config.maxRows);
+				templateData.data.standings = templateData.data.standings.slice(0, this.config.maxRows);
 			}
 		}
 		return templateData;
