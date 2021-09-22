@@ -41,6 +41,12 @@ Clone this repository:
 git clone https://github.com/ianperrin/MMM-Formula1.git
 ```
 
+Install dependencies:
+
+```bash
+npm install --production
+```
+
 Configure the module in your `config/config.js` file.
 
 ## Updating
@@ -51,10 +57,10 @@ If you want to update your MMM-Formula1 module to the latest version, use your t
 git pull
 ```
 
-If using the Race Schedule, (re)install `ical-generator`.
+(Re)install dependencies.
 
 ```bash
-npm install ical-generator
+npm install --production
 ```
 
 If you haven't changed the modules, this should work without any problems.
@@ -100,13 +106,6 @@ Stop your Magic Mirror (your exact method may vary)
 
 ```bash
 pm2 stop mm
-```
-
-Install `ical-generator` in your MMM-Formula1 module directory.
-
-```bash
-cd ~/MagicMirror/modules/MMM-Formula1
-npm install ical-generator
 ```
 
 Set the `calendar` option for your MMM-Formula1 module to true.
