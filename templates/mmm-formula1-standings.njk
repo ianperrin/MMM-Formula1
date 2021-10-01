@@ -14,7 +14,9 @@
                 {% if (config.type === "DRIVER") %}
                 <td>{{ "DRIVER" | translate }}</td>
                 {% endif %}
+                {% if (config.showConstructor or config.type !== "DRIVER") %}
                 <td>{{ "CONSTRUCTOR" | translate }}</td>
+                {% endif %}
                 <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
                 <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
             </tr>
@@ -27,7 +29,9 @@
                     <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
                 </td>
                 <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}</td>
+                {% if (config.showConstructor) %}
                 <td class="title light">{{ standing.Constructors | join (",", "name") }}</td>
+                {% endif %}
                 {% else %}
                 <td class="symbol">
                     <div class="flag flag-{{ standing.Constructor.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
