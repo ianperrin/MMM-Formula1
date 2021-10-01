@@ -12,6 +12,7 @@ Module.register("MMM-Formula1", {
 		type: "DRIVER",
 		maxRows: false,
 		calendar: false,
+		showConstructor: true,
 		fade: true,
 		fadePoint: 0.3,
 		reloadInterval: 30 * 60 * 1000, // every 30 minutes
