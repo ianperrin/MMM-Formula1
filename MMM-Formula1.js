@@ -22,7 +22,7 @@ Module.register("MMM-Formula1", {
 	},
 
 	// Store the Ergast data in an object.
-	ergastData: { DRIVER: null, CONSTRUCTOR: null },
+	ergastData: null,
 
 	// A loading boolean.
 	loading: true,
