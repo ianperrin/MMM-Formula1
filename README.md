@@ -24,8 +24,9 @@ A MagicMirror Module for displaying Formula 1 standings and race schedule.
 
 - Which season to display the standings for `season`
 - Whether to show the drivers or constructors standings `type`
+- Whether to show the constructor in the _DRIVER_ standings. `showConstructor`
 - How many drivers/constructors to display in the standings table `maxRows`
-- Display the upcoming race schedule using the standard [calendar](https://github.com/MichMich/MagicMirror/tree/develop/modules/default/calendar) module
+- Display the upcoming race schedule using the standard [calendar](https://docs.magicmirror.builders/modules/calendar.html) module
 
 ## Installation
 
