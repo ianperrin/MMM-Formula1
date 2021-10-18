@@ -45,6 +45,7 @@ git clone https://github.com/ianperrin/MMM-Formula1.git
 Install dependencies:
 
 ```bash
+cd ~/MagicMirror/modules/MMM-Formula1
 npm install --production
 ```
 
@@ -61,6 +62,7 @@ git pull
 (Re)install dependencies.
 
 ```bash
+cd ~/MagicMirror/modules/MMM-Formula1
 npm install --production
 ```
 
