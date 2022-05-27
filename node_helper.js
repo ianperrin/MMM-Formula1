@@ -48,10 +48,13 @@ module.exports = NodeHelper.create({
 		console.log(this.name + " is fetching " + this.config.type + " standings for the " + this.config.season + " season");
 		const endpoint = this.config.type === "DRIVER" ? "getDriverStandings" : "getConstructorStandings";
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
+		const self = this;
 		f1Api[endpoint](season).then((standings) => {
 			console.log(this.name + " is returning " + this.config.type + " standings for the " + season + " season");
 			this.sendSocketNotification(this.config.type + "_STANDINGS", standings);
-			this.standingsTimerId = setTimeout(this.fetchStandings, this.config.reloadInterval);
+			this.standingsTimerId = setTimeout(function () {
+				self.fetchStandings();
+			}, this.config.reloadInterval);
 		});
 	},
 
@@ -62,12 +65,15 @@ module.exports = NodeHelper.create({
 	fetchSchedule: function () {
 		console.log(this.name + " is fetching the race schedule for the " + this.config.season + " season");
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
+		const self = this;
 		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {
 			if (raceSchedule) {
 				raceScheduleDB = raceSchedule;
 				this.sendSocketNotification("RACE_SCHEDULE", raceSchedule);
 			}
-			this.scheduleTimerId = setTimeout(this.fetchSchedule, this.config.reloadInterval);
+			this.scheduleTimerId = setTimeout(function () {
+				self.fetchSchedule();
+			}, this.config.reloadInterval);
 		});
 	},
 
