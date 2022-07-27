@@ -40,7 +40,8 @@ Module.register("MMM-Formula1", {
 			de: "translations/de.json",
 			id: "translations/id.json",
 			sv: "translations/sv.json",
-			da: "translations/da.json"
+			da: "translations/da.json",
+			fr: "translations/fr.json"
 		};
 	},
 
