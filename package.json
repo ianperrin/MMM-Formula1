@@ -30,21 +30,20 @@
 	},
 	"homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
 	"devDependencies": {
-		"chai": "^4.2.0",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-jsdoc": "^36.1.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"mocha": "^8.4.0",
+		"chai": "^4.3.7",
+		"eslint": "^8.35.0",
+		"eslint-config-prettier": "^8.6.0",
+		"eslint-plugin-jsdoc": "^40.0.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"mocha": "^10.2.0",
 		"module-alias": "^2.2.2",
-		"prettier": "^2.4.1",
-		"stylelint": "^13.13.1",
-		"stylelint-config-prettier": "^8.0.2",
-		"stylelint-config-standard": "^22.0.0",
-		"stylelint-prettier": "^1.1.2"
+		"prettier": "^2.8.4",
+		"stylelint": "^15.2.0",
+		"stylelint-config-standard": "^30.0.1",
+		"stylelint-prettier": "^3.0.0"
 	},
 	"dependencies": {
 		"f1-api": "^1.2.0",
-		"ical-generator": "^3.0.0"
+		"ical-generator": "^3.6.1"
 	}
 }
