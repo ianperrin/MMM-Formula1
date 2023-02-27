@@ -1,4 +1,4 @@
-/* Magic Mirror
+/* MagicMirror²
  * Module: MMM-Formula1
  *
  * By Ian Perrin http://github.com/ianperrin/MMM-Formula1
