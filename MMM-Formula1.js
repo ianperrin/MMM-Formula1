@@ -53,7 +53,7 @@ Module.register("MMM-Formula1", {
 		// Add custom filters
 		this.addFilters();
 		// Load nationalities & start polling
-		var self = this;
+		const self = this;
 		this.loadNationalities(function (response) {
 			// Parse JSON string into object
 			self.nationalities = JSON.parse(response);
@@ -74,7 +74,7 @@ Module.register("MMM-Formula1", {
 		return "templates\\mmm-formula1-standings.njk";
 	},
 	getTemplateData() {
-		var templateData = {
+		const templateData = {
 			loading: this.loading,
 			config: this.config,
 			data: this.loading ? null : this.ergastData,
@@ -90,19 +90,19 @@ Module.register("MMM-Formula1", {
 	},
 	validateConfig() {
 		// Validate module type
-		var validTypes = ["DRIVER", "CONSTRUCTOR"];
+		const validTypes = ["DRIVER", "CONSTRUCTOR"];
 		if (validTypes.indexOf(this.config.type.toUpperCase()) === -1) {
 			this.config.type = "DRIVER";
 		}
 	},
 	addFilters() {
-		var env = this.nunjucksEnvironment();
+		const env = this.nunjucksEnvironment();
 		env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
 		env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
 	},
 	getFadeOpacity(index, itemCount) {
-		var fadeStart = itemCount * this.config.fadePoint;
-		var fadeItemCount = itemCount - fadeStart + 1;
+		const fadeStart = itemCount * this.config.fadePoint;
+		const fadeItemCount = itemCount - fadeStart + 1;
 		if (this.config.fade && index > fadeStart) {
 			return 1 - (index - fadeStart) / fadeItemCount;
 		} else {
@@ -110,7 +110,7 @@ Module.register("MMM-Formula1", {
 		}
 	},
 	getCodeFromNationality(nationality) {
-		for (var i = 0, len = this.nationalities.length; i < len; i++) {
+		for (let i = 0, len = this.nationalities.length; i < len; i++) {
 			if (this.nationalities[i].demonym === nationality) {
 				return this.nationalities[i].code.toLowerCase();
 			}
@@ -118,8 +118,8 @@ Module.register("MMM-Formula1", {
 		return "";
 	},
 	loadNationalities(callback) {
-		var xobj = new XMLHttpRequest();
-		var path = this.file("nationalities.json");
+		const xobj = new XMLHttpRequest();
+		const path = this.file("nationalities.json");
 		xobj.overrideMimeType("application/json");
 		xobj.open("GET", path, true);
 		xobj.onreadystatechange = function () {

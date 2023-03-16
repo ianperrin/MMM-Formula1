@@ -9,8 +9,8 @@ const f1Api = require("f1-api");
 const Log = require("logger");
 const NodeHelper = require("node_helper");
 
-var ical;
-var raceScheduleDB = false;
+let ical;
+let raceScheduleDB = false;
 
 module.exports = NodeHelper.create({
 	// Subclass start method.
@@ -85,12 +85,12 @@ module.exports = NodeHelper.create({
 	 */
 	serverSchedule(req, res) {
 		Log.log("Serving the race schedule iCal");
-		var cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
+		const cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
 		if (raceScheduleDB) {
-			for (var i = 0; i < raceScheduleDB.length; i++) {
+			for (let i = 0; i < raceScheduleDB.length; i++) {
 				// Parse date/time
-				var utcDate = raceScheduleDB[i].date;
-				var startDate = Date.parse(utcDate);
+				const utcDate = raceScheduleDB[i].date;
+				const startDate = Date.parse(utcDate);
 				if (startDate && !isNaN(startDate)) {
 					// Create Event
 					cal.createEvent({
