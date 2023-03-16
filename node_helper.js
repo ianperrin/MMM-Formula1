@@ -91,7 +91,7 @@ module.exports = NodeHelper.create({
 				// Parse date/time
 				const utcDate = raceScheduleDB[i].date;
 				const startDate = Date.parse(utcDate);
-				if (startDate && !isNaN(startDate)) {
+				if (startDate && !Number.isNaN(startDate)) {
 					// Create Event
 					cal.createEvent({
 						start: new Date(startDate),
