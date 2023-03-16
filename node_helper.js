@@ -15,13 +15,13 @@ let raceScheduleDB = false;
 module.exports = NodeHelper.create({
 	// Subclass start method.
 	start() {
-		Log.log("Starting module: " + this.name);
+		Log.log(`Starting module: ${this.name}`);
 		this.config = {};
 	},
 
 	// Subclass socketNotificationReceived received.
 	socketNotificationReceived(notification, payload) {
-		Log.log(this.name + " received a notification: " + notification);
+		Log.log(`${this.name} received a notification: ${notification}`);
 		if (notification === "CONFIG") {
 			this.config = payload;
 			// Clear existing timers
@@ -35,7 +35,7 @@ module.exports = NodeHelper.create({
 			if (this.config.calendar) {
 				ical = require("ical-generator");
 				this.fetchSchedule();
-				this.expressApp.get("/" + this.name + "/schedule.ics", this.serverSchedule);
+				this.expressApp.get(`/${this.name}/schedule.ics`, this.serverSchedule);
 			}
 			// Get standings data
 			this.fetchStandings();
@@ -47,13 +47,13 @@ module.exports = NodeHelper.create({
 	 * Request driver or constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
 	 */
 	fetchStandings() {
-		Log.log(this.name + " is fetching " + this.config.type + " standings for the " + this.config.season + " season");
+		Log.log(`${this.name} is fetching ${this.config.type} standings for the ${this.config.season} season`);
 		const endpoint = this.config.type === "DRIVER" ? "getDriverStandings" : "getConstructorStandings";
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api[endpoint](season).then((standings) => {
-			Log.log(this.name + " is returning " + this.config.type + " standings for the " + season + " season");
-			this.sendSocketNotification(this.config.type + "_STANDINGS", standings);
+			Log.log(`${this.name} is returning ${this.config.type} standings for the ${season} season`);
+			this.sendSocketNotification(`${this.config.type}_STANDINGS`, standings);
 			this.standingsTimerId = setTimeout(function () {
 				self.fetchStandings();
 			}, this.config.reloadInterval);
@@ -65,7 +65,7 @@ module.exports = NodeHelper.create({
 	 * Request current race schedule from the Ergast MRD API and broadcast as an iCal
 	 */
 	fetchSchedule() {
-		Log.log(this.name + " is fetching the race schedule for the " + this.config.season + " season");
+		Log.log(`${this.name} is fetching the race schedule for the ${this.config.season} season`);
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {

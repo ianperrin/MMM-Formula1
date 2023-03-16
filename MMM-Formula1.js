@@ -47,7 +47,7 @@ Module.register("MMM-Formula1", {
 
 	// Subclass start method.
 	start() {
-		Log.info("Starting module: " + this.name);
+		Log.info(`Starting module: ${this.name}`);
 		// Validate config options
 		this.validateConfig();
 		// Add custom filters
@@ -63,7 +63,7 @@ Module.register("MMM-Formula1", {
 	},
 	// Subclass socketNotificationReceived method.
 	socketNotificationReceived(notification, payload) {
-		Log.info(this.name + " received a notification: " + notification);
+		Log.info(`${this.name} received a notification: ${notification}`);
 		if (["DRIVER_STANDINGS", "CONSTRUCTOR_STANDINGS"].indexOf(notification) >= 0) {
 			this.ergastData = payload;
 			this.loading = false;
