@@ -19,18 +19,18 @@ jobs:
 
     steps:
       - name: Checkout MagicMirror repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: MichMich/MagicMirror
           path: MagicMirror
 
       - name: Checkout Module repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: MagicMirror/modules/MMM-Formula1
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
