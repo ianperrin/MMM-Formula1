@@ -6,6 +6,7 @@
  */
 
 const f1Api = require("f1-api");
+const Log = require("logger");
 const NodeHelper = require("node_helper");
 
 var ical;
@@ -14,13 +15,13 @@ var raceScheduleDB = false;
 module.exports = NodeHelper.create({
 	// Subclass start method.
 	start() {
-		console.log("Starting module: " + this.name);
+		Log.log("Starting module: " + this.name);
 		this.config = {};
 	},
 
 	// Subclass socketNotificationReceived received.
 	socketNotificationReceived(notification, payload) {
-		console.log(this.name + " received a notification: " + notification);
+		Log.log(this.name + " received a notification: " + notification);
 		if (notification === "CONFIG") {
 			this.config = payload;
 			// Clear existing timers
@@ -46,12 +47,12 @@ module.exports = NodeHelper.create({
 	 * Request driver or constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
 	 */
 	fetchStandings() {
-		console.log(this.name + " is fetching " + this.config.type + " standings for the " + this.config.season + " season");
+		Log.log(this.name + " is fetching " + this.config.type + " standings for the " + this.config.season + " season");
 		const endpoint = this.config.type === "DRIVER" ? "getDriverStandings" : "getConstructorStandings";
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api[endpoint](season).then((standings) => {
-			console.log(this.name + " is returning " + this.config.type + " standings for the " + season + " season");
+			Log.log(this.name + " is returning " + this.config.type + " standings for the " + season + " season");
 			this.sendSocketNotification(this.config.type + "_STANDINGS", standings);
 			this.standingsTimerId = setTimeout(function () {
 				self.fetchStandings();
@@ -64,7 +65,7 @@ module.exports = NodeHelper.create({
 	 * Request current race schedule from the Ergast MRD API and broadcast as an iCal
 	 */
 	fetchSchedule() {
-		console.log(this.name + " is fetching the race schedule for the " + this.config.season + " season");
+		Log.log(this.name + " is fetching the race schedule for the " + this.config.season + " season");
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {
@@ -83,7 +84,7 @@ module.exports = NodeHelper.create({
 	 * Publish race schedule as an iCal
 	 */
 	serverSchedule(req, res) {
-		console.log("Serving the race schedule iCal");
+		Log.log("Serving the race schedule iCal");
 		var cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
 		if (raceScheduleDB) {
 			for (var i = 0; i < raceScheduleDB.length; i++) {
