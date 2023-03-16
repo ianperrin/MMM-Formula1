@@ -105,9 +105,8 @@ Module.register("MMM-Formula1", {
 		const fadeItemCount = itemCount - fadeStart + 1;
 		if (this.config.fade && index > fadeStart) {
 			return 1 - (index - fadeStart) / fadeItemCount;
-		} else {
-			return 1;
 		}
+		return 1;
 	},
 	getCodeFromNationality(nationality) {
 		for (let i = 0, len = this.nationalities.length; i < len; i++) {
