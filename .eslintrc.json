@@ -22,10 +22,5 @@
 			"globalReturn": true
 		}
 	},
-	"rules": {
-		"prettier/prettier": "error",
-		"eqeqeq": "error",
-		"no-prototype-builtins": "off",
-		"no-unused-vars": "off"
-	}
+	"rules": { "eqeqeq": "error" }
 }
