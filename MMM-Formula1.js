@@ -28,12 +28,12 @@ Module.register("MMM-Formula1", {
 	loading: true,
 
 	// Subclass getStyles method.
-	getStyles: function () {
+	getStyles() {
 		return ["font-awesome.css", "MMM-Formula1.css"];
 	},
 
 	// Subclass getTranslations method.
-	getTranslations: function () {
+	getTranslations() {
 		return {
 			en: "translations/en.json",
 			nl: "translations/nl.json",
@@ -46,7 +46,7 @@ Module.register("MMM-Formula1", {
 	},
 
 	// Subclass start method.
-	start: function () {
+	start() {
 		Log.info("Starting module: " + this.name);
 		// Validate config options
 		this.validateConfig();
@@ -62,7 +62,7 @@ Module.register("MMM-Formula1", {
 		});
 	},
 	// Subclass socketNotificationReceived method.
-	socketNotificationReceived: function (notification, payload) {
+	socketNotificationReceived(notification, payload) {
 		Log.info(this.name + " received a notification: " + notification);
 		if (["DRIVER_STANDINGS", "CONSTRUCTOR_STANDINGS"].indexOf(notification) >= 0) {
 			this.ergastData = payload;
@@ -70,10 +70,10 @@ Module.register("MMM-Formula1", {
 			this.updateDom(this.config.animationSpeed);
 		}
 	},
-	getTemplate: function () {
+	getTemplate() {
 		return "templates\\mmm-formula1-standings.njk";
 	},
-	getTemplateData: function () {
+	getTemplateData() {
 		var templateData = {
 			loading: this.loading,
 			config: this.config,
@@ -88,7 +88,7 @@ Module.register("MMM-Formula1", {
 		}
 		return templateData;
 	},
-	validateConfig: function () {
+	validateConfig() {
 		// Validate module type
 		var validTypes = ["DRIVER", "CONSTRUCTOR"];
 		if (validTypes.indexOf(this.config.type.toUpperCase()) === -1) {
@@ -100,7 +100,7 @@ Module.register("MMM-Formula1", {
 		env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
 		env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
 	},
-	getFadeOpacity: function (index, itemCount) {
+	getFadeOpacity(index, itemCount) {
 		var fadeStart = itemCount * this.config.fadePoint;
 		var fadeItemCount = itemCount - fadeStart + 1;
 		if (this.config.fade && index > fadeStart) {
@@ -109,7 +109,7 @@ Module.register("MMM-Formula1", {
 			return 1;
 		}
 	},
-	getCodeFromNationality: function (nationality) {
+	getCodeFromNationality(nationality) {
 		for (var i = 0, len = this.nationalities.length; i < len; i++) {
 			if (this.nationalities[i].demonym === nationality) {
 				return this.nationalities[i].code.toLowerCase();
