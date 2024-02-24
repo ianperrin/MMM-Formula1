@@ -6,20 +6,22 @@
  */
 
 const f1Api = require("f1-api");
+const Log = require("logger");
 const NodeHelper = require("node_helper");
-var ical;
-var raceScheduleDB = false;
+
+let ical;
+let raceScheduleDB = false;
 
 module.exports = NodeHelper.create({
 	// Subclass start method.
-	start: function () {
-		console.log("Starting module: " + this.name);
+	start() {
+		Log.log(`Starting module: ${this.name}`);
 		this.config = {};
 	},
 
 	// Subclass socketNotificationReceived received.
-	socketNotificationReceived: function (notification, payload) {
-		console.log(this.name + " received a notification: " + notification);
+	socketNotificationReceived(notification, payload) {
+		Log.log(`${this.name} received a notification: ${notification}`);
 		if (notification === "CONFIG") {
 			this.config = payload;
 			// Clear existing timers
@@ -33,7 +35,7 @@ module.exports = NodeHelper.create({
 			if (this.config.calendar) {
 				ical = require("ical-generator");
 				this.fetchSchedule();
-				this.expressApp.get("/" + this.name + "/schedule.ics", this.serverSchedule);
+				this.expressApp.get(`/${this.name}/schedule.ics`, this.serverSchedule);
 			}
 			// Get standings data
 			this.fetchStandings();
@@ -44,14 +46,14 @@ module.exports = NodeHelper.create({
 	 * fetchStandings
 	 * Request driver or constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
 	 */
-	fetchStandings: function () {
-		console.log(this.name + " is fetching " + this.config.type + " standings for the " + this.config.season + " season");
+	fetchStandings() {
+		Log.log(`${this.name} is fetching ${this.config.type} standings for the ${this.config.season} season`);
 		const endpoint = this.config.type === "DRIVER" ? "getDriverStandings" : "getConstructorStandings";
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api[endpoint](season).then((standings) => {
-			console.log(this.name + " is returning " + this.config.type + " standings for the " + season + " season");
-			this.sendSocketNotification(this.config.type + "_STANDINGS", standings);
+			Log.log(`${this.name} is returning ${this.config.type} standings for the ${season} season`);
+			this.sendSocketNotification(`${this.config.type}_STANDINGS`, standings);
 			this.standingsTimerId = setTimeout(function () {
 				self.fetchStandings();
 			}, this.config.reloadInterval);
@@ -62,8 +64,8 @@ module.exports = NodeHelper.create({
 	 * fetchSchedule
 	 * Request current race schedule from the Ergast MRD API and broadcast as an iCal
 	 */
-	fetchSchedule: function () {
-		console.log(this.name + " is fetching the race schedule for the " + this.config.season + " season");
+	fetchSchedule() {
+		Log.log(`${this.name} is fetching the race schedule for the ${this.config.season} season`);
 		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
 		const self = this;
 		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {
@@ -81,15 +83,15 @@ module.exports = NodeHelper.create({
 	 * serverSchedule
 	 * Publish race schedule as an iCal
 	 */
-	serverSchedule: function (req, res) {
-		console.log("Serving the race schedule iCal");
-		var cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
+	serverSchedule(req, res) {
+		Log.log("Serving the race schedule iCal");
+		const cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
 		if (raceScheduleDB) {
-			for (var i = 0; i < raceScheduleDB.length; i++) {
+			for (let i = 0; i < raceScheduleDB.length; i++) {
 				// Parse date/time
-				var utcDate = raceScheduleDB[i].date;
-				var startDate = Date.parse(utcDate);
-				if (startDate && !isNaN(startDate)) {
+				const utcDate = raceScheduleDB[i].date;
+				const startDate = Date.parse(utcDate);
+				if (startDate && !Number.isNaN(startDate)) {
 					// Create Event
 					cal.createEvent({
 						start: new Date(startDate),

@@ -39,7 +39,7 @@ cd ~/MagicMirror/modules
 Clone this repository:
 
 ```bash
-git clone https://github.com/ianperrin/MMM-Formula1.git
+git clone https://github.com/ianperrin/MMM-Formula1
 ```
 
 Install dependencies:

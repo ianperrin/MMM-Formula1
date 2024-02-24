@@ -4,7 +4,7 @@
 	"root": true,
 	"env": {
 		"browser": true,
-		"es6": true,
+		"es2022": true,
 		"mocha": true,
 		"node": true
 	},
@@ -17,15 +17,10 @@
 	},
 	"parserOptions": {
 		"sourceType": "module",
-		"ecmaVersion": 2017,
+		"ecmaVersion": "latest",
 		"ecmaFeatures": {
 			"globalReturn": true
 		}
 	},
-	"rules": {
-		"prettier/prettier": "error",
-		"eqeqeq": "error",
-		"no-prototype-builtins": "off",
-		"no-unused-vars": "off"
-	}
+	"rules": { "eqeqeq": "error" }
 }

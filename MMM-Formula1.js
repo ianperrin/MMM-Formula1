@@ -1,4 +1,4 @@
-/* Magic Mirror
+/* MagicMirror²
  * Module: MMM-Formula1
  *
  * By Ian Perrin http://github.com/ianperrin/MMM-Formula1
@@ -28,31 +28,33 @@ Module.register("MMM-Formula1", {
 	loading: true,
 
 	// Subclass getStyles method.
-	getStyles: function () {
+	getStyles() {
 		return ["font-awesome.css", "MMM-Formula1.css"];
 	},
 
 	// Subclass getTranslations method.
-	getTranslations: function () {
+	getTranslations() {
 		return {
 			en: "translations/en.json",
 			nl: "translations/nl.json",
 			de: "translations/de.json",
 			id: "translations/id.json",
+			it: "translations/it.json",
 			sv: "translations/sv.json",
-			da: "translations/da.json"
+			da: "translations/da.json",
+			fr: "translations/fr.json"
 		};
 	},
 
 	// Subclass start method.
-	start: function () {
-		Log.info("Starting module: " + this.name);
+	start() {
+		Log.info(`Starting module: ${this.name}`);
 		// Validate config options
 		this.validateConfig();
 		// Add custom filters
 		this.addFilters();
 		// Load nationalities & start polling
-		var self = this;
+		const self = this;
 		this.loadNationalities(function (response) {
 			// Parse JSON string into object
 			self.nationalities = JSON.parse(response);
@@ -61,19 +63,19 @@ Module.register("MMM-Formula1", {
 		});
 	},
 	// Subclass socketNotificationReceived method.
-	socketNotificationReceived: function (notification, payload) {
-		Log.info(this.name + " received a notification: " + notification);
+	socketNotificationReceived(notification, payload) {
+		Log.info(`${this.name} received a notification: ${notification}`);
 		if (["DRIVER_STANDINGS", "CONSTRUCTOR_STANDINGS"].indexOf(notification) >= 0) {
 			this.ergastData = payload;
 			this.loading = false;
 			this.updateDom(this.config.animationSpeed);
 		}
 	},
-	getTemplate: function () {
+	getTemplate() {
 		return "templates\\mmm-formula1-standings.njk";
 	},
-	getTemplateData: function () {
-		var templateData = {
+	getTemplateData() {
+		const templateData = {
 			loading: this.loading,
 			config: this.config,
 			data: this.loading ? null : this.ergastData,
@@ -87,29 +89,28 @@ Module.register("MMM-Formula1", {
 		}
 		return templateData;
 	},
-	validateConfig: function () {
+	validateConfig() {
 		// Validate module type
-		var validTypes = ["DRIVER", "CONSTRUCTOR"];
+		const validTypes = ["DRIVER", "CONSTRUCTOR"];
 		if (validTypes.indexOf(this.config.type.toUpperCase()) === -1) {
 			this.config.type = "DRIVER";
 		}
 	},
 	addFilters() {
-		var env = this.nunjucksEnvironment();
+		const env = this.nunjucksEnvironment();
 		env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
 		env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
 	},
-	getFadeOpacity: function (index, itemCount) {
-		var fadeStart = itemCount * this.config.fadePoint;
-		var fadeItemCount = itemCount - fadeStart + 1;
+	getFadeOpacity(index, itemCount) {
+		const fadeStart = itemCount * this.config.fadePoint;
+		const fadeItemCount = itemCount - fadeStart + 1;
 		if (this.config.fade && index > fadeStart) {
 			return 1 - (index - fadeStart) / fadeItemCount;
-		} else {
-			return 1;
 		}
+		return 1;
 	},
-	getCodeFromNationality: function (nationality) {
-		for (var i = 0, len = this.nationalities.length; i < len; i++) {
+	getCodeFromNationality(nationality) {
+		for (let i = 0, len = this.nationalities.length; i < len; i++) {
 			if (this.nationalities[i].demonym === nationality) {
 				return this.nationalities[i].code.toLowerCase();
 			}
@@ -117,8 +118,8 @@ Module.register("MMM-Formula1", {
 		return "";
 	},
 	loadNationalities(callback) {
-		var xobj = new XMLHttpRequest();
-		var path = this.file("nationalities.json");
+		const xobj = new XMLHttpRequest();
+		const path = this.file("nationalities.json");
 		xobj.overrideMimeType("application/json");
 		xobj.open("GET", path, true);
 		xobj.onreadystatechange = function () {

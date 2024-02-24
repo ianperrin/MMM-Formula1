@@ -1,7 +1,7 @@
 {
-	"name": "MMM-Formula1",
+	"name": "mmm-formula1",
 	"version": "1.4.0",
-	"description": "A Formula 1 module for the Magic Mirror.",
+	"description": "A Formula 1 module for MagicMirror².",
 	"scripts": {
 		"test": "npm run test:prettier && npm run test:js && npm run test:css",
 		"test:unit": "NODE_ENV=test mocha tests --recursive",
@@ -30,21 +30,20 @@
 	},
 	"homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
 	"devDependencies": {
-		"chai": "^4.2.0",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-jsdoc": "^36.1.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"mocha": "^8.4.0",
+		"chai": "^4.3.7",
+		"eslint": "^8.36.0",
+		"eslint-config-prettier": "^8.7.0",
+		"eslint-plugin-jsdoc": "^40.0.3",
+		"eslint-plugin-prettier": "^4.2.1",
+		"mocha": "^10.2.0",
 		"module-alias": "^2.2.2",
-		"prettier": "^2.4.1",
-		"stylelint": "^13.13.1",
-		"stylelint-config-prettier": "^8.0.2",
-		"stylelint-config-standard": "^22.0.0",
-		"stylelint-prettier": "^1.1.2"
+		"prettier": "^2.8.4",
+		"stylelint": "^15.3.0",
+		"stylelint-config-standard": "^31.0.0",
+		"stylelint-prettier": "^3.0.0"
 	},
 	"dependencies": {
 		"f1-api": "^1.2.0",
-		"ical-generator": "^3.0.0"
+		"ical-generator": "^3.6.1"
 	}
 }
