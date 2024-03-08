@@ -1,7 +1,7 @@
 # MagicMirror Module: MMM-Formula1
 
 A MagicMirror Module for displaying Formula 1 standings and race schedule.
-Forked from Ian Perrin's take on this.
+Forked from Ian Perrin's take on this.This module combines standing and schedule in one module. Various options enable you to control the size of the module.
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
 [![License](https://img.shields.io/badge/license-MIT-informational)](https://raw.githubusercontent.com/73cirdan/MMM-Formula1/master/LICENSE)
@@ -114,10 +114,12 @@ The following properties can be configured:
 
 ## Thanks
 
-ianperrin first version which lead to this version
-- removed f1api from the package.json and rewrote node_helper
-- removed dev tools
-- rewrote nunjucks template to support different display options
-- removed ical dependency and possibility show calendar. default upcomming weekend and next race
-track layouts by F1laps for the track vectors
-ergast api for the data (btw ergast announced 2024 to be the last year of service)
+- ianperrins first version which lead to this version
+  - removed f1api from the package.json and rewrote node_helper
+  - removed dev tools
+  - rewrote nunjucks template to support different display options
+  - removed ical dependency and possibility to use magicmirror calendar. The default upcomming weekend and next race are shown in what used to be the standing module
+- track layouts by F1laps for the track vectors
+  - found here on github
+- ergast api for the data
+  - btw ergast announced 2024 to be the last year of service)
