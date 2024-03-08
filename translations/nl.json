@@ -1,9 +1,9 @@
 {
-	"DRIVER": "Driver",
-	"CONSTRUCTOR": "Constructor",
+	"DRIVER": "Coureur",
+	"CONSTRUCTOR": "Constructeur",
 	"SEASON": "Seizoen",
 	"ROUND": "Ronde",
-	"NO DATA": "Geen data ontvangen van api"
+	"NO DATA": "Geen data ontvangen van api",
 	"RACE_DETAILS": "Race details",
 	"CIRCUIT_LAYOUT": "Circuit layout",
 	"NEXT_RACE": "Volgende race",
