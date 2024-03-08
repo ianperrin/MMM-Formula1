@@ -234,9 +234,6 @@ Module.register("MMM-Formula1", {
 	// Find out which position a constructor has 
 	findFanConstructorPosition (standings) {
 		for (var i=0; i<standings.length ; i++) {
-			Log.info( standings[i].Constructor.constructorId);
-		}
-		for (var i=0; i<standings.length ; i++) {
 			if (standings[i].Constructor.constructorId === this.config.fanConstructorCode.toLowerCase()) {
 				return standings[i];
 			}
@@ -291,6 +288,7 @@ Module.register("MMM-Formula1", {
 		env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
 		env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
 		env.addFilter("showStanding", this.showStanding.bind(this));
+		env.addFilter("translate", this.translate.bind(this));
 	},
 	// used to fade to black in the Driver or Constructor list, use config.fade = true
 	getFadeOpacity(index, itemCount) {
