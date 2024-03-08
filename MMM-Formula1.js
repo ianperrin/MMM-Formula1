@@ -211,7 +211,11 @@ Module.register("MMM-Formula1", {
 
 		const waitingfortime = "<i class=\"small fa fa-hourglass\"></i>";
 		if (dateTime.date && dateTime.time ) {
-			return moment( dateTime.date +"T"+ dateTime.time).format("DD MMM hh:mm A");
+			if (config.timeFormat = 24) {
+				return moment( dateTime.date +"T"+ dateTime.time).format("DD MMM HH:mm");
+			} else {
+				return moment( dateTime.date +"T"+ dateTime.time).format("DD MMM hh:mm A");
+			}
 		}
 		if (dateTime.date) {
 			return moment( dateTime.date ).format("DD MMM") + waitinfortime;
