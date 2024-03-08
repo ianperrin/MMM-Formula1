@@ -1,32 +1,36 @@
 # MagicMirror Module: MMM-Formula1
 
 A MagicMirror Module for displaying Formula 1 standings and race schedule.
+Forked from Ian Perrin's take on this.
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
-[![License](https://img.shields.io/badge/license-MIT-informational)](https://raw.githubusercontent.com/ianperrin/MMM-Formula1/master/LICENSE)
-![Test Status](https://github.com/ianperrin/MMM-Formula1/actions/workflows/node.js.yml/badge.svg)
-[![Code Climate](https://codeclimate.com/github/ianperrin/MMM-Formula1/badges/gpa.svg)](https://codeclimate.com/github/ianperrin/MMM-Formula1)
-[![Known Vulnerabilities](https://snyk.io/test/github/ianperrin/MMM-Formula1/badge.svg)](https://snyk.io/test/github/ianperrin/MMM-Formula1)
+[![License](https://img.shields.io/badge/license-MIT-informational)](https://raw.githubusercontent.com/73cirdan/MMM-Formula1/master/LICENSE)
 
 ## Example
 
-![Example screenshot](.github/example.png)
+![Example screenshot](screenshot.png)
 
-### The module displays the current Formula 1 standings table from the selected season with the following information
+### The module displays the current Formula 1 schedule and standings from the selected season with the following information
 
 - The flag for the driver or constructor.
 - The drivers name (when the drivers standings are displayed).
 - The constructor name.
 - The current points total.
 - The current number of wins.
+- the schedule for the current race weekend, including free practice, sprint, quali and race time
+- the track layout for the current race weekend
+- the name and time for the race after this weekend
 
 ### In addition you can configure the following options
 
 - Which season to display the standings for `season`
-- Whether to show the drivers or constructors standings `type`
-- Whether to show the constructor in the _DRIVER_ standings. `showConstructor`
+- Whether to show the drivers or constructors standings `type`, there are modes for both and mix. with mix the driver and constructor are shown in the same space, but after each other in time
+- Whether to show the constructor in the _DRIVER_ standings. `showConstructorOfDriver`
 - How many drivers/constructors to display in the standings table `maxRows`
-- Display the upcoming race schedule using the standard [calendar](https://docs.magicmirror.builders/modules/calendar.html) module
+- If you have a favourite driver/constructor not in "how many" range, you can add a fanDriver or fanConstrucotr. These are added to the standing
+- Display the sectors of the track layout (in color)
+- If you want to see the schedule
+- If you want to see the schedule without the next race
 
 ## Installation
 
@@ -39,7 +43,7 @@ cd ~/MagicMirror/modules
 Clone this repository:
 
 ```bash
-git clone https://github.com/ianperrin/MMM-Formula1
+git clone https://github.com/73cirdan/MMM-Formula1
 ```
 
 Install dependencies:
@@ -78,7 +82,7 @@ modules: [
   {
     module: "MMM-Formula1",
     position: "top_right",
-    header: "F1 Standings",
+    header: "Formula 1",
     config: {
       // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
     }
@@ -93,45 +97,17 @@ The following properties can be configured:
 | **Option**        | **Default**            | **Description**                                                                                                                                                                    | **Possible Values**                                                                                                          |
 | ----------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `season`          | `current`              | _Optional_ - The season to display.                                                                                                                                                | `current` = Standings for the current season, or a year (greater than or equal to `1950`) = Standings for a specific season. |
-| `type`            | `DRIVER`               | _Optional_ - The type of standings to display.                                                                                                                                     | `DRIVER` or `CONSTRUCTOR`                                                                                                    |
-| `showConstructor` | `true`                 | _Optional_ - Whether to show the constructor in the DRIVER standings.                                                                                                              | `true` or `false`                                                                                                            |
-| `maxRows`         | `false`                | _Optional_ - The maximum number of drivers/constructors to show in the standings table.                                                                                            | `false` or a `number`.                                                                                                       |
-| `calendar`        | `false`                | _Optional_ - Whether the module should publish the upcoming Race Schedule as an ical.                                                                                              | `true` or `false`.                                                                                                           |
+| `showStanding`            | `DRIVER`               | _Optional_ - The type of standings to display.                                                                                                                                     | `DRIVER`, `CONSTRUCTOR`, "BOTH", "MIX", "NONE"                                                                                                    |
+| `showConstructorOfDriver` | `false`                 | _Optional_ - Whether to show the constructor in the DRIVER standings.                                                                                                              | `true` or `false`                                                                                                            |
+| `maxRowsDriver`         | `20`                | _Optional_ - The maximum number of drivers/constructors to show in the standings table.                                                                                            | a `number`.                                                                                                       |
+| `maxRowsConstructor`         | `10`                | _Optional_ - The maximum number of drivers/constructors to show in the standings table.                                                                                            | a `number`.                                                                                                       |
+| `schedule`        | `true`                | _Optional_ - Whether the module should publish the upcoming Race Schedule as an ical.                                                                                              | `true` or `false`.                                                                                                           |
 | `fade`            | `true`                 | _Optional_ - Whether to fade the activities to black (Gradient).                                                                                                                   | `true` or `false`                                                                                                            |
 | `fadePoint`       | `0.4`                  | _Optional_ - Where to start fade?                                                                                                                                                  | `0` (top of the list) - `1` (bottom of list)                                                                                 |
 | `reloadInterval`  | `1800000` (30 minutes) | _Optional_ - How often does the data needs to be reloaded from the API? (Milliseconds). See the [Terms & Conditions](http://ergast.com/mrd/terms/) for responsible use of the API. | `7500` - `86400000`                                                                                                          |
 | `animationSpeed`  | `2500` (2.5 seconds)   | _Optional_ - The speed of the update animation. (Milliseconds).                                                                                                                    | `0` - `5000`                                                                                                                 |
 | `grayscale`       | `true`                 | _Optional_ - Whether to show the flags in grayscale (`true`) or colour (`false`).                                                                                                  | `true` or `false`                                                                                                            |
-| `showFooter`      | `true`                 | _Optional_ - Whether to show the footer below the table with information about the season and round.                                                                               | `true` or `false`                                                                                                            |
-
-### Displaying the Race Schedule
-
-Stop your Magic Mirror (your exact method may vary)
-
-```bash
-pm2 stop mm
-```
-
-Set the `calendar` option for your MMM-Formula1 module to true.
-
-```javascript
-config: {
-    // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
-    calendar: true,
-}
-```
-
-Add the Formula 1 Race Schedule calendar to the `calendar` module to your configuration (`config/config.js`).
-
-```javascript
-{
-    symbol: 'flag-checkered',
-    url: 'http://localhost:8080/MMM-Formula1/schedule.ics',
-}
-```
-
-Restart your Magic Mirror (your exact method may vary)
-
-```bash
-pm2 start mm
-```
+| `showNextRace`      | `true`                 | _Optional_ - Whether to show the name and time of the next race after the upcomming weekend.                                                                               | `true` or `false`                                                                                                            |
+| `fanDriverCode`      | `true`                 | _Optional_ - Whether to add the name of the driver to the driver standing list if it would fall out of the maxRowsDriver filter.                                                                               | `3 character code used for the driver`                                                                                                            |
+| `fanConstructorCode`      | `true`                 | _Optional_ - Whether to add the name of the constructor to the constrcutor standing list if it would fall out of the maxRowsDriver filter.                                                                               | `for 2024 red_bull, ferrari, mercedes, mclaren, aston_martin, sauber, haas, rb, williams, alpine`                                                                                                            |
+| `showSector`      | `true`                 | _Optional_ - Whether to show the sectors in the svg for the track.Uses colors, set to false if uni-color is important for you                                                                               | `true` or `false`                                                                                                            |
