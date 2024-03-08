@@ -113,7 +113,7 @@ The following properties can be configured:
 
 ## Thanks
 
-- ianperrins first version which lead to this version
+- ianperrins first version which led to this version. Major changes:
   - removed f1api from the package.json and rewrote node_helper
   - removed dev tools
   - rewrote nunjucks template to support different display options
