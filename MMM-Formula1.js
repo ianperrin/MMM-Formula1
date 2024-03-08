@@ -98,7 +98,7 @@ Module.register("MMM-Formula1", {
 		});
 		if (this.config.showStanding === "MIX") {
 			this.scheduledTimer = setInterval(function() {
-				self.updateDom(this.config.animationSpeed);
+				self.updateDom(self.config.animationSpeed);
             		}, this.config.screenRefreshInterval);
 		}
 	},
