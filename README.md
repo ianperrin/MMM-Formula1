@@ -24,12 +24,12 @@ Forked from Ian Perrin's take on this.
 ### In addition you can configure the following options
 
 - Which season to display the standings for `season`
-- Whether to show the drivers or constructors standings `type`, there are modes for both and mix. with mix the driver and constructor are shown in the same space, but after each other in time
-- Whether to show the constructor in the _DRIVER_ standings. `showConstructorOfDriver`
+- Whether to show the drivers or constructors standings `type`, there are modes for BOTH and MIX. With MIX the driver and constructor are shown in the same space, but after each other in time
+- Whether to show the constructor in the _DRIVER_ standings. `showConstructorOfDriver`. currently looking into this to replace with an icon logo.
 - How many drivers/constructors to display in the standings table `maxRows`
-- If you have a favourite driver/constructor not in "how many" range, you can add a fanDriver or fanConstrucotr. These are added to the standing
-- Display the sectors of the track layout (in color)
-- If you want to see the schedule
+- If you have a favourite driver/constructor not in "how many" range, you can add a fanDriver or fanConstructor. These are added to the standing
+- Display the sectors of the track layout (in color) or just the track
+- If you want to see the race weeking timing table schedule
 - If you want to see the schedule without the next race
 
 ## Installation
@@ -111,3 +111,13 @@ The following properties can be configured:
 | `fanDriverCode`      | `true`                 | _Optional_ - Whether to add the name of the driver to the driver standing list if it would fall out of the maxRowsDriver filter.                                                                               | `3 character code used for the driver`                                                                                                            |
 | `fanConstructorCode`      | `true`                 | _Optional_ - Whether to add the name of the constructor to the constrcutor standing list if it would fall out of the maxRowsDriver filter.                                                                               | `for 2024 red_bull, ferrari, mercedes, mclaren, aston_martin, sauber, haas, rb, williams, alpine`                                                                                                            |
 | `showSector`      | `true`                 | _Optional_ - Whether to show the sectors in the svg for the track.Uses colors, set to false if uni-color is important for you                                                                               | `true` or `false`                                                                                                            |
+
+## Thanks
+
+ianperrin first version which lead to this version
+- removed f1api from the package.json and rewrote node_helper
+- removed dev tools
+- rewrote nunjucks template to support different display options
+- removed ical dependency and possibility show calendar. default upcomming weekend and next race
+track layouts by F1laps for the track vectors
+ergast api for the data (btw ergast announced 2024 to be the last year of service)
