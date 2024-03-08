@@ -14,7 +14,7 @@ Module.register("MMM-Formula1", {
 		showStanding: "DRIVER",
 		loadDriver: true,	// is set automatically is DRIVER, MIX, BOTH is used in showStanding
 		loadConstructor: false, // is set automatically is CONSTRUCTOR, MIX, BOTH is used in showStanding
-		shedule: true,		// to show timing of the raceweekend, racemap, nextrace
+		schedule: true,		// to show timing of the raceweekend, racemap, nextrace
 		showConstructorOfDriver: false, // show the constructor the driver is driving for when displaying the driver
 		fade: false,		// effect, only for driver or constructor tables, fade to black in the list
 		fadePoint: 0.3,
