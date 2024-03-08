@@ -1,16 +1,14 @@
 /* MMM-Formula1
  * Node Helper
  *
- * By Ian Perrin http://github.com/ianperrin/MMM-Formula1
+ * By cirdan http://github.com/73cirdan/MMM-Formula1
+ * Forked from: Ian Perrin http://github.com/ianperrin/MMM-Formula1
  * MIT Licensed.
  */
 
-const f1Api = require("f1-api");
 const Log = require("logger");
 const NodeHelper = require("node_helper");
-
-let ical;
-let raceScheduleDB = false;
+const axios = require('axios').default;
 
 module.exports = NodeHelper.create({
 	// Subclass start method.
@@ -25,84 +23,70 @@ module.exports = NodeHelper.create({
 		if (notification === "CONFIG") {
 			this.config = payload;
 			// Clear existing timers
-			if (this.standingsTimerId) {
-				clearTimeout(this.standingsTimerId);
+			if (this.timerId) {
+				clearTimeout(this.timerId);
 			}
-			if (this.scheduleTimerId) {
-				clearTimeout(this.scheduleTimerId);
-			}
-			// Set up race calendar if required
-			if (this.config.calendar) {
-				ical = require("ical-generator");
-				this.fetchSchedule();
-				this.expressApp.get(`/${this.name}/schedule.ics`, this.serverSchedule);
-			}
-			// Get standings data
-			this.fetchStandings();
+			this.fetchApiData()
 		}
 	},
 
 	/**
 	 * fetchStandings
 	 * Request driver or constructor standings from the Ergast MRD API and broadcast it to the MagicMirror module if it's received.
-	 */
-	fetchStandings() {
-		Log.log(`${this.name} is fetching ${this.config.type} standings for the ${this.config.season} season`);
-		const endpoint = this.config.type === "DRIVER" ? "getDriverStandings" : "getConstructorStandings";
-		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
-		const self = this;
-		f1Api[endpoint](season).then((standings) => {
-			Log.log(`${this.name} is returning ${this.config.type} standings for the ${season} season`);
-			this.sendSocketNotification(`${this.config.type}_STANDINGS`, standings);
-			this.standingsTimerId = setTimeout(function () {
-				self.fetchStandings();
-			}, this.config.reloadInterval);
-		});
-	},
-
-	/**
-	 * fetchSchedule
 	 * Request current race schedule from the Ergast MRD API and broadcast as an iCal
 	 */
-	fetchSchedule() {
-		Log.log(`${this.name} is fetching the race schedule for the ${this.config.season} season`);
-		const season = (this.config.season === "current", new Date().getFullYear(), this.config.season);
-		const self = this;
-		f1Api.getSeasonRacesSchedule(season).then((raceSchedule) => {
-			if (raceSchedule) {
-				raceScheduleDB = raceSchedule;
-				this.sendSocketNotification("RACE_SCHEDULE", raceSchedule);
-			}
-			this.scheduleTimerId = setTimeout(function () {
-				self.fetchSchedule();
-			}, this.config.reloadInterval);
-		});
-	},
+	fetchApiData() {
+		const season = this.config.season === "current" ? new Date().getFullYear() : this.config.season;
+		var f1Url = "http://ergast.com/api/f1/" + season;
 
-	/**
-	 * serverSchedule
-	 * Publish race schedule as an iCal
-	 */
-	serverSchedule(req, res) {
-		Log.log("Serving the race schedule iCal");
-		const cal = ical({ domain: "localhost", name: "Formula1 Race Schedule" });
-		if (raceScheduleDB) {
-			for (let i = 0; i < raceScheduleDB.length; i++) {
-				// Parse date/time
-				const utcDate = raceScheduleDB[i].date;
-				const startDate = Date.parse(utcDate);
-				if (startDate && !Number.isNaN(startDate)) {
-					// Create Event
-					cal.createEvent({
-						start: new Date(startDate),
-						end: new Date(startDate),
-						summary: raceScheduleDB[i].name,
-						location: raceScheduleDB[i].circuit.name
-						// url: raceScheduleDB[i].url
-					});
-				}
+		if (this.config.loadDriver) 		this.invokeURL("DRIVER", 	f1Url + "/driverStandings.json");
+		if (this.config.loadConstructor) 	this.invokeURL("CONSTRUCTOR",	f1Url + "/constructorStandings.json");
+		if (this.config.schedule) 		this.invokeURL("SCHEDULE", 	f1Url + ".json");
+
+		const self = this;
+		this.timerId = setTimeout(function () {
+			self.fetchApiData();
+		}, this.config.reloadInterval);
+	},
+	// call the api at ergast 
+	invokeURL( type, url ) {
+		const self = this;
+		Log.log(`${self.name} is requesting the ${type} on url ` + url);
+
+		axios.get(url)
+                .then(function (response) {
+                     	// handle success console.log(response);
+			var data = null;
+			if (type.includes("SCHEDULE")) { 
+				data = response.data.MRData.RaceTable.Races;
+			} else {
+				data = response.data.MRData.StandingsTable.StandingsLists[0];
 			}
-		}
-		cal.serve(res);
-	}
+			self.sendSocketNotification(type, data);
+			Log.log(`${self.name} is returning the ${type} for the season`);
+			//Log.log(data);
+                 }).catch(function (error) {
+                        self.handleError(error, type);
+                })
+	},
+        // handle the error on an axios request
+	handleError(error, type) {
+                 if (!error) {
+                        console.log("Unknown Error: " + this.name );
+		 } else if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log("Error: " + this.name + ": " + error.response.status);
+                        console.log("Error: " + this.name + ": " + error.response.data);
+                        console.log("Error: " + this.name + ": " + error.response.headers);
+                } else if (error.request) {
+                        // The request was made but no response was received
+                       console.log("Error: " + this.name + ": " + error.request);
+                } else {
+                     // Something happened in setting up the request that triggered an Error
+                       console.log("Error: " + this.name + ": " + error.message);
+                }
+		//console.log(error.config);
+		this.sendSocketNotification(type+"_ERROR", this.name + " No F1 connection ($(type}), will retry");
+	},
 });
