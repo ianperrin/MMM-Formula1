@@ -41,7 +41,7 @@ module.exports = NodeHelper.create({
 
 		if (this.config.loadDriver) 		this.invokeURL("DRIVER", 	f1Url + "/driverStandings.json");
 		if (this.config.loadConstructor) 	this.invokeURL("CONSTRUCTOR",	f1Url + "/constructorStandings.json");
-		if (this.config.schedule) 		this.invokeURL("SCHEDULE", 	f1Url + ".json");
+		if (this.config.showSchedule) 		this.invokeURL("SCHEDULE", 	f1Url + ".json");
 
 		const self = this;
 		this.timerId = setTimeout(function () {
