@@ -29,7 +29,7 @@ Forked from Ian Perrin's take on this.This module combines standing and schedule
 - How many drivers/constructors to display in the standings table `maxRowsDriver` or `maxRowsConstructor`
 - If you have a favourite driver/constructor not in "how many" range, you can add a `fanDriverCode` or `fanConstructorCode`. This driver and/or constructor is added to the standing.
 
-- Whether to show the race weeking timing table schedule. `schedule`
+- Whether to show the race weeking timing table schedule. `showSchedule`
 - Whether to show the schedule without the next race information. `showNextRace`
 ## Installation
 
@@ -108,7 +108,8 @@ The following properties can be configured:
 | `showNextRace`      | `true`                 | _Optional_ - Whether to show the name and time of the next race after the upcomming weekend.                                                                               | `true` or `false`                                                                                                            |
 | `fanDriverCode`      | `true`                 | _Optional_ - Whether to add the name of the driver to the driver standing list if it would fall out of the maxRowsDriver filter.                                                                               | `3 character code used for the driver`  This is the code you see in your screen when watching F1, like VER for Verstappen.                                                                                                          |
 | `fanConstructorCode`      | `true`                 | _Optional_ - Whether to add the name of the constructor to the constructor standing list if it would fall out of the maxRowsConstructor filter.                                                                               | for 2024 `red_bull`, `ferrari`, `mercedes`, `mclaren`, `aston_martin`, `sauber`, `haas`, `rb`, `williams`, `alpine`.                                                                                                            |
-#Thanks
+
+## Thanks
 
 - ianperrins first version which led to this version. Major changes:
   - removed f1api from the package.json and rewrote node_helper
