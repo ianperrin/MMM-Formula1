@@ -14,7 +14,7 @@ Module.register("MMM-Formula1", {
 		showStanding: "DRIVER",
 		loadDriver: true,	// is set automatically is DRIVER, MIX, BOTH is used in showStanding
 		loadConstructor: false, // is set automatically is CONSTRUCTOR, MIX, BOTH is used in showStanding
-		schedule: true,		// to show timing of the raceweekend, racemap, nextrace
+		showSchedule: true,		// to show timing of the raceweekend, racemap, nextrace
 		showConstructorOfDriver: false, // show the constructor the driver is driving for when displaying the driver
 		fade: false,		// effect, only for driver or constructor tables, fade to black in the list
 		fadePoint: 0.3,
@@ -29,7 +29,7 @@ Module.register("MMM-Formula1", {
 	dataDriver: null,
 	dataConstructor: null,
 	dataSchedule: null,
-	endpoint: "/modules/MMM-Formula1/tracks",
+	endpoint: "/modules/MMM-Formula1/",
 	nodatacountD: 0,
 	nodatacountC: 0,
 	nodatacountS: 0,
@@ -137,7 +137,8 @@ Module.register("MMM-Formula1", {
 			dataD: this.dataDriver,
 			dataC: this.dataConstructor,
 			dataS: this.dataSchedule,
-			endpoint: this.endpoint+(this.config.showSector?"s":""),
+			endpointconstructors: this.endpoint+"/constructors/",
+			endpointtracks: this.endpoint+(this.config.grayscale?"tracks":"trackss"),
 			identifier: this.identifier,
 			timeStamp: this.dataRefreshTimeStamp
 		};
@@ -279,7 +280,7 @@ Module.register("MMM-Formula1", {
 		if (!this.config.schedule &&
 		    !this.config.loadDriver &&
 		    !this.config.loadConstructor) {
-		    this.config.schedule = true;
+		    this.config.showSchedule = true;
 		}
 	},
 	// Filters are methods called from the nunjucks template

@@ -7,11 +7,12 @@
     {% if "DRIVER" | showStanding %}
         <thead>
             <tr class="normal">
-                <td>{{ "DRIVER" | translate }}</td>
-                <td class="light symbol align-right stat"><span class="fa fa-ranking-star"></span></td>
-                <td class="light symbol stat"><span class="fa fa-globe"></span></td>
-                <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
-                <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
+                <td class="light "><span class="symbol fa fa-wrench"></span></td>
+                <td class="light align-right rightpad"><span class="fa fa-ranking-star"></span></td>
+                <td>{{ "DRIVER" | translate | safe }}</td>
+                <td class="light"><span class="symbol fa fa-globe"></span></td>
+                <td class="light align-right "><span class="fa fa-line-chart"></span></td>
+                <td class="light align-right "><span class="fa fa-trophy"></span></td>
             </tr>
         </thead>
         <tbody>
@@ -22,17 +23,15 @@
             {% else %}
             {% for standing in dataD.DriverStandings %}
             <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
+                <td class="title bright"> <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructors[0].constructorId }}.png" height="27"></img> 
+                <td class="bright align-right rightpad ">{{ standing.position }}</td>
                 <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}
-                {% if (config.showConstructorOfDriver) %}
-                <div class="title light">{{ standing.Constructors | join (", ", "name") }}</div>
-		{% endif %}
 		</td>
-                <td class="bright align-right stat">{{ standing.position }}</td>
-                <td class="light symbol stat">
-                    <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
+                <td class="light ">
+                    <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }} {{ " grayscale" if config.grayscale }}" ></div>
                 </td>
-                <td class="bright align-right stat">{{ standing.points }}</td>
-                <td class="bright align-right stat">{{ standing.wins }}</td>
+                <td class="bright align-right ">{{ standing.points }}</td>
+                <td class="bright align-right ">{{ standing.wins }}</td>
             </tr>
             {% endfor %}
             {% endif %}
@@ -41,11 +40,12 @@
     {% if "CONSTRUCTOR" | showStanding %}
         <thead>
             <tr class="normal">
+                <td class="light "><span class="symbol fa fa-wrench"></span></td>
+                <td class="light align-right rightpad"><span class="fa fa-ranking-star"></span></td>
                 <td>{{ "CONSTRUCTOR" | translate }}</td>
-                <td class="light symbol align-right stat"><span class="fa fa-ranking-star"></span></td>
-                <td class="light symbol stat"><span class="fa fa-globe"></span></td>
-                <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
-                <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
+                <td class="light"><span class="symbol fa fa-globe"></span></td>
+                <td class="light align-right"><span class="fa fa-line-chart"></span></td>
+                <td class="light align-right"><span class="fa fa-trophy"></span></td>
             </tr>
         </thead>
         <tbody>
@@ -56,19 +56,20 @@
             {% else %}
             {% for standing in dataC.ConstructorStandings %}
             <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
+                <td class="title bright"> <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructor.constructorId }}.png" height="27"></img> 
+                <td class="bright align-right rightpad">{{ standing.position }}</td>
                 <td class="title bright">{{ standing.Constructor.name }}</td>
-                <td class="bright align-right stat">{{ standing.position }}</td>
-                <td class="light symbol stat">
+                <td class="light ">
                     <div class="flag flag-{{ standing.Constructor.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
                 </td>
-                <td class="bright align-right stat">{{ standing.points }}</td>
-                <td class="bright align-right stat">{{ standing.wins }}</td>
+                <td class="bright align-right">{{ standing.points }}</td>
+                <td class="bright align-right">{{ standing.wins }}</td>
             </tr>
             {% endfor %}
             {% endif %}
         </tbody>
     {% endif %}
-    {% if (config.schedule) %}
+    {% if (config.showSchedule) %}
     </table>
     <table class="small align-left">
         <thead>
@@ -85,8 +86,8 @@
         {% else %}
     	    <tr class="title bright">
                 <td class="small">{{ "SEASON" | translate }}: {{ dataS.season }}, {{ "ROUND" | translate }}: {{ dataS.round }}</td>
-                <td rowspan="7" class="align-right"><img src="{{endpoint}}{{ dataS.circuitImage }}" height="155"></img> 
-	    	{% if (config.showSector) %}
+                <td rowspan="7" class="align-right"><img src="{{endpointtracks}}{{ dataS.circuitImage }}" height="155"></img> 
+	    	{% if not config.grayscale %}
 		<div>
 			<span class="xsmall" style="color: #EF4444">S1</span>
 			<span class="xsmall" style="color: #3B82F6">S2</span>
