@@ -83,7 +83,7 @@ modules: [
     position: "top_right",
     header: "Formula 1",
     config: {
-      // Optional configuration options - see https://github.com/ianperrin/MMM-Formula1#configuration-options
+      // Optional configuration options - see https://github.com/73cirdan/MMM-Formula1#configuration-options
     }
   }
 ];
@@ -121,3 +121,9 @@ The following properties can be configured:
   - found here on github
 - ergast api for the data
   - btw ergast announced to deprecate the api end of 2024. There is an alternative free api that will add schedule and standings to their api early in 2024.
+  - ![more info here](https://openf1.org/?javascript#roadmap )
+
+## Disclaimer
+
+This an unofficial project and is not associated in any way with the Formula 1 companies. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V. 
+
