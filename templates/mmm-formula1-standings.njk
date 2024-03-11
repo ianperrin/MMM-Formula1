@@ -23,12 +23,13 @@
             {% else %}
             {% for standing in dataD.DriverStandings %}
             <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
-                <td class="title bright"> <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructors[0].constructorId }}.png" height="27"></img> 
+                <td class="title bright">
+			 <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructors[0].constructorId }}.png" height="27"></img> 
                 <td class="bright align-right rightpad ">{{ standing.position }}</td>
                 <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}
 		</td>
                 <td class="light ">
-                    <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }} {{ " grayscale" if config.grayscale }}" ></div>
+                     <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }} {{ " grayscale" if config.grayscale }}" ></div>
                 </td>
                 <td class="bright align-right ">{{ standing.points }}</td>
                 <td class="bright align-right ">{{ standing.wins }}</td>

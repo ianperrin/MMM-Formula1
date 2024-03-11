@@ -1,7 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 .MMM-Formula1 table {
-  border-spacing: 1px 0;
-  border-collapse: separate;
+  border-spacing: 2px;
+  border-collapse: collapse;
 }
 
 .MMM-Formula1 .symbol {
@@ -10,6 +10,9 @@
 
 .MMM-Formula1 .rightpad {
   padding-right: 7px;
+}
+.MMM-Formula1 img {
+	display: block;
 }
 
 /* Flag Sprites - https://www.flag-sprites.com/en_US/ */
@@ -22,7 +25,10 @@
 
 .MMM-Formula1 .flag{width:27px;height:18px;display:inline-block}
 
-img.flag{width:30px}
+img.flag
+{
+	width:30px;
+}
 
 .flag{background:url(flags_responsive.png) no-repeat;background-size:100%}
 
