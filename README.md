@@ -8,7 +8,7 @@ Forked from Ian Perrin's take on this.This module combines standing and schedule
 
 ## Example
 
-![Example screenshot](screenshots/screenshot.png)
+![Example screenshot](screenshot.png)
 
 ### The module displays the current Formula 1 schedule and standings from the selected season with the following information
 
