@@ -113,7 +113,7 @@ The following properties can be configured:
 
 - ianperrins first version which led to this version. Major changes:
   - removed f1api from the package.json and rewrote node_helper
-  - removed dev tools
+  - removed dev tools for now, will learn it and apply it in the future ;-)
   - rewrote nunjucks template to support different display options
   - removed ical dependency and possibility to use magicmirror calendar. The default upcomming weekend and next race are shown in what used to be the standing module
   - updated flags css
