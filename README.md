@@ -21,6 +21,7 @@ Forked from Ian Perrin's take on this.This module combines standing and schedule
 - the track layout for the current race weekend
 - the name and time for the race after this weekend
 - constructor icon logos and higher resolution flags
+- The module has allready some multilingual options, feel free to add translations, or improve some of the allready provided ones, cause I don't speak all of them ;-)
 
 ### In addition you can configure the following options
 
