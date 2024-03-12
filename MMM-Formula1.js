@@ -15,7 +15,6 @@ Module.register("MMM-Formula1", {
 		loadDriver: true,	// is set automatically is DRIVER, MIX, BOTH is used in showStanding
 		loadConstructor: false, // is set automatically is CONSTRUCTOR, MIX, BOTH is used in showStanding
 		showSchedule: true,		// to show timing of the raceweekend, racemap, nextrace
-		showConstructorOfDriver: false, // show the constructor the driver is driving for when displaying the driver
 		fade: false,		// effect, only for driver or constructor tables, fade to black in the list
 		fadePoint: 0.3,
 		reloadInterval: 30 * 60 * 1000, // every 30 minutes, calling the api for new data
