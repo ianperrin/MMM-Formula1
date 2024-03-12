@@ -9,9 +9,9 @@ Module.register("MMM-Formula1", {
 	// Default module config.
 	defaults: {
 		season: "current",
-		maxRowsDriver: 20,
-		maxRowsConstructor: 10,
-		showStanding: "DRIVER",
+		maxRowsDriver: 5,
+		maxRowsConstructor: 5,
+		showStanding: "MIX",
 		loadDriver: true,	// is set automatically is DRIVER, MIX, BOTH is used in showStanding
 		loadConstructor: false, // is set automatically is CONSTRUCTOR, MIX, BOTH is used in showStanding
 		showSchedule: true,		// to show timing of the raceweekend, racemap, nextrace
@@ -21,7 +21,7 @@ Module.register("MMM-Formula1", {
 		reloadInterval: 30 * 60 * 1000, // every 30 minutes, calling the api for new data
 		screenRefreshInterval: 30 * 1000, // every 30 seconds , only used when showStanding=MIX 
 		animationSpeed: 2.5 * 1000, // 2.5 seconds
-		grayscale: true,		// used for the flag colors.
+		grayscale: false,		// used for the flag colors.
 		showNextRace: true,	// When showing the raceweekend schedule, also show the next race
 	},
 
@@ -266,7 +266,7 @@ Module.register("MMM-Formula1", {
 		configType = this.config.showStanding.toUpperCase();
 		const validTypes = ["NONE", "DRIVER", "CONSTRUCTOR", "BOTH", "MIX"];
 		if (validTypes.indexOf(configType) === -1) {
-			this.config.showStanding = configType = "DRIVER";
+			this.config.showStanding = configType = "MIX";
 		}
 		switch (configType) {
 			case "DRIVER":
