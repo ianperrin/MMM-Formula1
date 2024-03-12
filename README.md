@@ -1,6 +1,6 @@
-# MagicMirror Module: MMM-Formula1
+# MagicMirror² Module: MMM-Formula1
 
-A MagicMirror Module for displaying Formula 1 standings and race schedule.
+A MagicMirror² Module for displaying Formula 1 standings and race schedule.
 Forked from Ian Perrin's take on this.This module combines standing and schedule in one module. Various options enable you to control the size of the module.
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
