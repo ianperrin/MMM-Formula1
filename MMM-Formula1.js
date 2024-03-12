@@ -225,6 +225,8 @@ Module.register("MMM-Formula1", {
 	},
 	// Find out which position a fan has 
 	findFanDriverPosition (standings) {
+		
+		if (!this.config.fanDriverCode) { return null; }
 		for (var i=0; i<standings.length ; i++) {
 			if (standings[i].Driver.code === this.config.fanDriverCode.toUpperCase()) {
 				return standings[i];
@@ -234,6 +236,9 @@ Module.register("MMM-Formula1", {
 	},
 	// Find out which position a constructor has 
 	findFanConstructorPosition (standings) {
+
+		if (!this.config.fanConstructorCode) { return null; }
+
 		for (var i=0; i<standings.length ; i++) {
 			if (standings[i].Constructor.constructorId === this.config.fanConstructorCode.toLowerCase()) {
 				return standings[i];
