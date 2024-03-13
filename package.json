@@ -22,7 +22,7 @@
     "Formula1",
     "module"
   ],
-  "author": "Ian Perrin",
+  "author": "Ian Perrin/Cirdan",
   "contributors": "https://github.com/73cirdan/MMM-Formula1/graphs/contributors",
   "license": "MIT",
   "bugs": {
@@ -41,6 +41,9 @@
     "prettier": "^2.8.8",
     "stylelint": "^15.3.0",
     "stylelint-config-standard": "^31.0.0",
-    "stylelint-prettier": "^3.0.0"
+    "stylelint-prettier": "^3.0.0",
+    "module-alias": "^2.2.2",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
   }
 }
