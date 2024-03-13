@@ -2,53 +2,143 @@
     <div class="small dimmed light">
         {{ "LOADING" | translate | safe }}
     </div>
-{% elif data.standings.length === 0 %}
-    <div class="small dimmed light">
-        {{ "NO DATA" | translate | safe }}
-    </div>
 {% else %}
     <table class="small align-left">
+    {% if "DRIVER" | showStanding %}
         <thead>
             <tr class="normal">
-                <td></td>
-                {% if (config.type === "DRIVER") %}
-                <td>{{ "DRIVER" | translate }}</td>
-                {% endif %}
-                {% if (config.showConstructor or config.type !== "DRIVER") %}
-                <td>{{ "CONSTRUCTOR" | translate }}</td>
-                {% endif %}
-                <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
-                <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
+                <td class="light "><span class="symbol fa fa-wrench"></span></td>
+                <td class="light align-right rightpad"><span class="fa fa-ranking-star"></span></td>
+                <td>{{ "DRIVER" | translate | safe }}</td>
+                <td class="light"><span class="symbol fa fa-globe"></span></td>
+                <td class="light align-right "><span class="fa fa-line-chart"></span></td>
+                <td class="light align-right "><span class="fa fa-trophy"></span></td>
             </tr>
         </thead>
         <tbody>
-            {% for standing in data.standings %}
+	    {% if (dataD === null)  %}
+    		<tr class="small dimmed light">
+        	<td colspan="5" text-align="center">	{{ "NO DATA" | translate | safe }}</>
+    		</tr>
+            {% else %}
+            {% for standing in dataD.DriverStandings %}
             <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
-                {% if (config.type === "DRIVER") %}
-                <td class="symbol light">
-                    <div class="flag flag-{{ standing.driver.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
+                <td class="title bright">
+			 <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructors[0].constructorId }}.png" height="27"></img> 
+                <td class="bright align-right rightpad ">{{ standing.position }}</td>
+                <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}
+		</td>
+                <td class="light ">
+                     <div class="flag flag-{{ standing.Driver.nationality | getCodeFromNationality }} {{ " grayscale" if config.grayscale }}" ></div>
                 </td>
-                <td class="title bright">{{ standing.driver.firstName }} {{ standing.driver.lastName }}</td>
-                {% if (config.showConstructor) %}
-                <td class="title light">{{ standing.constructors | join (", ", "name") }}</td>
-                {% endif %}
-                {% else %}
-                <td class="symbol">
-                    <div class="flag flag-{{ standing.constructors.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
-                </td>
-                <td class="title bright">{{ standing.constructor.name }}</td>
-                {% endif %}
-                <td class="bright align-right stat">{{ standing.points }}</td>
-                <td class="bright align-right stat">{{ standing.wins }}</td>
+                <td class="bright align-right ">{{ standing.points }}</td>
+                <td class="bright align-right ">{{ standing.wins }}</td>
             </tr>
             {% endfor %}
+            {% endif %}
         </tbody>
-        {% if (config.showFooter) %}
-        </tfoot>
-            <tr>
-                <td class="xsmall align-right" colspan="5">{{ "SEASON" | translate }}: {{ data.season }}, {{ "ROUND" | translate }}: {{ data.round }}</td>
+    {% endif %}
+    {% if "CONSTRUCTOR" | showStanding %}
+        <thead>
+            <tr class="normal">
+                <td class="light "><span class="symbol fa fa-wrench"></span></td>
+                <td class="light align-right rightpad"><span class="fa fa-ranking-star"></span></td>
+                <td>{{ "CONSTRUCTOR" | translate }}</td>
+                <td class="light"><span class="symbol fa fa-globe"></span></td>
+                <td class="light align-right"><span class="fa fa-line-chart"></span></td>
+                <td class="light align-right"><span class="fa fa-trophy"></span></td>
             </tr>
-        </tfoot>
-        {% endif %}
+        </thead>
+        <tbody>
+	    {% if (dataC === null)  %}
+    		<tr class="small dimmed light">
+        	<td colspan="5" text-align="center">	{{ "NO DATA" | translate | safe }}</>
+    		</tr>
+            {% else %}
+            {% for standing in dataC.ConstructorStandings %}
+            <tr class="normal" style="opacity: {{ loop.index | getFadeOpacity(loop.length) }};">
+                <td class="title bright"> <img class=" {{ "grayscale" if config.grayscale }}" src="{{endpointconstructors}}{{ standing.Constructor.constructorId }}.png" height="27"></img> 
+                <td class="bright align-right rightpad">{{ standing.position }}</td>
+                <td class="title bright">{{ standing.Constructor.name }}</td>
+                <td class="light ">
+                    <div class="flag flag-{{ standing.Constructor.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>
+                </td>
+                <td class="bright align-right">{{ standing.points }}</td>
+                <td class="bright align-right">{{ standing.wins }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    {% endif %}
+    {% if (config.showSchedule) %}
     </table>
+    <table class="small align-left">
+        <thead>
+            <tr class="normal">
+                <td>{{ "RACE_DETAILS" | translate }}</td>
+                <td>{{ "CIRCUIT_LAYOUT" | translate }}</td>
+            </tr>
+        </thead>
+        <tbody>
+    	{% if (dataS === null) %}
+    		<tr class="small dimmed light">
+        	<td colspan="2" text-align="center">{{ "NO DATA" | translate | safe }}</>
+    		</tr>
+        {% else %}
+    	    <tr class="title bright">
+                <td class="small">{{ "SEASON" | translate }}: {{ dataS.season }}, {{ "ROUND" | translate }}: {{ dataS.round }}</td>
+                <td rowspan="7" class="align-right"><img src="{{endpointtracks}}{{ dataS.circuitImage }}" height="155"></img> 
+	    	{% if not config.grayscale %}
+		<div>
+			<span class="xsmall" style="color: #EF4444">S1</span>
+			<span class="xsmall" style="color: #3B82F6">S2</span>
+			<span class="xsmall" style="color: #FBBF24">S3</span>
+		</div>
+	    	{% endif %}
+		</td>
+       	    </tr>
+    	    <tr class="title bright">
+                <td class="small">{{ dataS.raceName }}</td>
+       	    </tr>
+	    {% if (dataS.pract1Date) %}
+    	    <tr class="title ">
+		<td class="small">{{ "FP1_DATE" | translate }}: {{ dataS.pract1Date }}</td>
+       	    </tr>
+	    {% endif %}
+	    {% if (dataS.pract2Date) %}
+    	    <tr class="title ">
+	    	<td class="small">{{ "FP2_DATE" | translate }}: {{ dataS.pract2Date }}</td>
+       	    </tr>
+	    {% endif %}
+	    {% if (dataS.pract3Date) %}
+    	    <tr class="title ">
+	    	<td class="small">{{ "FP3_DATE" | translate }}: {{ dataS.pract3Date }}</td>
+       	    </tr>
+	    {% endif %}
+	    {% if (dataS.sprintDate) %}
+    	    <tr class="title bright">
+	      	<td class="small">{{ "SPRINT_DATE" | translate }}: {{ dataS.sprintDate }}</td>
+       	    </tr>
+	    {% endif %}
+	    {% if (dataS.qualifyingDate) %}
+    	    <tr class="title bright">
+	    	<td class="small">{{ "QUALI_DATE" | translate }}: {{ dataS.qualifyingDate }}</td>
+       	    </tr>
+	    {% endif %}
+	    {% if (dataS.raceDate) %}
+    	    <tr class="title bright">
+	    	<td class="small">{{ "RACE_DATE" | translate }}: {{ dataS.raceDate }}</td>
+       	    </tr>
+	    {% endif %}
+        {% endif %}
+        </tbody>
+    </table>
+    {% if (dataS and config.showNextRace ) %}
+    	<table class="small align-left">
+    	    <tr class="title light">
+                <td class="small" text-align="center">{{ "NEXT_RACE" | translate }}: {{ dataS.nextRaceDate }}: {{ dataS.nextRaceName }}</td>
+       	    </tr>
+    	</table>
+        {% endif %}
+    {% endif %}
 {% endif %}
