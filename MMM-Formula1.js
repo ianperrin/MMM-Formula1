@@ -1,7 +1,7 @@
 /* MagicMirror²
  * Module: MMM-Formula1
  *
- * By Ian Perrin http://github.com/ianperrin/MMM-Formula1
+ * By Cirdan, Ian Perrin http://github.com/ianperrin/MMM-Formula1
  * MIT Licensed.
  */
 
@@ -103,7 +103,7 @@ Module.register("MMM-Formula1", {
   },
   // Subclass socketNotificationReceived method.
   socketNotificationReceived(notification, payload) {
-    Log.info(`${this.name} received a notification: ${notification}-${payload}`);
+    Log.info(`${this.name} received a notification: ${notification}`);
 
     switch (notification) {
       case "DRIVER":
