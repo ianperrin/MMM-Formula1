@@ -1,0 +1,27 @@
+{
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:jsdoc/recommended"],
+  "plugins": ["prettier", "jsdoc", "html"],
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "globals": {
+    "config": true,
+    "Log": true,
+    "MM": true,
+    "Module": true,
+    "moment": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "globalReturn": true
+    }
+  },
+  "rules": {
+    "eqeqeq": "error"
+  }
+}
