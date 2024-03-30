@@ -1,49 +1,49 @@
 {
-	"name": "mmm-formula1",
-	"version": "1.4.0",
-	"description": "A Formula 1 module for MagicMirror².",
-	"scripts": {
-		"test": "npm run test:prettier && npm run test:js && npm run test:css",
-		"test:unit": "NODE_ENV=test mocha tests --recursive",
-		"test:prettier": "prettier --check **/*.{js,css,json,md,yml}",
-		"test:js": "eslint *.js --config .eslintrc.json --quiet",
-		"test:css": "stylelint **/*.css --config .stylelintrc.json",
-		"lint:prettier": "prettier --write **/*.{js,css,json,md,yml}",
-		"lint:js": "eslint *.js --config .eslintrc.json --fix",
-		"lint:css": "stylelint **/*.css --config .stylelintrc.json --fix"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ianperrin/MMM-Formula1"
-	},
-	"keywords": [
-		"magic mirror",
-		"smart mirror",
-		"Formula1",
-		"module"
-	],
-	"author": "Ian Perrin",
-	"contributors": "https://github.com/ianperrin/MMM-Formula1/graphs/contributors",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/ianperrin/MMM-Formula1/issues"
-	},
-	"homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
-	"devDependencies": {
-		"chai": "^4.3.7",
-		"eslint": "^8.36.0",
-		"eslint-config-prettier": "^8.7.0",
-		"eslint-plugin-jsdoc": "^40.0.3",
-		"eslint-plugin-prettier": "^4.2.1",
-		"mocha": "^10.2.0",
-		"module-alias": "^2.2.2",
-		"prettier": "^2.8.4",
-		"stylelint": "^15.3.0",
-		"stylelint-config-standard": "^31.0.0",
-		"stylelint-prettier": "^3.0.0"
-	},
-	"dependencies": {
-		"f1-api": "^1.2.0",
-		"ical-generator": "^3.6.1"
-	}
+  "name": "mmm-formula1",
+  "version": "2.0.0",
+  "description": "A Formula 1 module for MagicMirror².",
+  "scripts": {
+    "test": "npm run test:prettier && npm run test:js && npm run test:css",
+    "test:unit": "NODE_ENV=test mocha tests --recursive",
+    "test:prettier": "prettier --check **/*.{js,css,json,md,yml}",
+    "test:js": "eslint *.js --config .eslintrc.json --quiet",
+    "test:css": "stylelint **/*.css --config .stylelintrc.json",
+    "lint:prettier": "prettier --write **/*.{js,css,json,md,yml}",
+    "lint:js": "eslint *.js --config .eslintrc.json --fix",
+    "lint:css": "stylelint **/*.css --config .stylelintrc.json --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianperrin/MMM-Formula1"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "Formula1",
+    "module"
+  ],
+  "author": "Ian Perrin/Cirdan",
+  "contributors": "https://github.com/ianperrin/MMM-Formula1/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianperrin/MMM-Formula1/issues"
+  },
+  "homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
+  "dependencies": {
+    "axios": ">=1.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-html": "^8.0.0",
+    "eslint-plugin-jsdoc": "^40.0.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "stylelint": "^15.3.0",
+    "stylelint-config-standard": "^31.0.0",
+    "stylelint-prettier": "^3.0.0",
+    "module-alias": "^2.2.2",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
 }

@@ -1,6 +1,16 @@
 {
-	"DRIVER": "Pilote",
-	"CONSTRUCTOR": "Constructeur",
-	"SEASON": "Saison",
-	"ROUND": "Manche"
+  "DRIVER": "Pilote",
+  "CONSTRUCTOR": "Constructeur",
+  "SEASON": "Saison",
+  "ROUND": "Manche",
+  "NO DATA": "No data provided by api(yet)",
+  "RACE_DETAILS": "Race details",
+  "CIRCUIT_LAYOUT": "Circuit layout",
+  "NEXT_RACE": "Next race",
+  "RACE_DATE": "Race",
+  "QUALI_DATE": "Quali",
+  "SPRINT_DATE": "Sprint",
+  "FP1_DATE": "Free Practice 1",
+  "FP2_DATE": "Free Practice 2",
+  "FP3_DATE": "Free Practice 3"
 }
