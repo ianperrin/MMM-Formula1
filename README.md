@@ -1,10 +1,13 @@
 # MagicMirror² Module: MMM-Formula1
 
 A MagicMirror² Module for displaying Formula 1 standings and race schedule.
-Forked from Ian Perrin's take on this.This module combines standing and schedule in one module. Various options enable you to control the size of the module.
+This version combines standing and schedule in one module. Various options enable you to control the size of the module.
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
 [![License](https://img.shields.io/badge/license-MIT-informational)](https://raw.githubusercontent.com/73cirdan/MMM-Formula1/master/LICENSE)
+![Test Status](https://github.com/ianperrin/MMM-Formula1/actions/workflows/node.js.yml/badge.svg)
+[![Code Climate](https://codeclimate.com/github/ianperrin/MMM-Formula1/badges/gpa.svg)](https://codeclimate.com/github/ianperrin/MMM-Formula1)
+[![Known Vulnerabilities](https://snyk.io/test/github/ianperrin/MMM-Formula1/badge.svg)](https://snyk.io/test/github/ianperrin/MMM-Formula1)
 
 ## Example
 
