@@ -3,14 +3,14 @@
   "CONSTRUCTOR": "Konstruktør",
   "SEASON": "Sæson",
   "ROUND": "Runde",
-  "NO DATA": "No data provided by api(yet)",
-  "RACE_DETAILS": "Race details",
-  "CIRCUIT_LAYOUT": "Circuit layout",
-  "NEXT_RACE": "Next race",
+  "NO DATA": "Ingen data leveret af api (endnu)",
+  "RACE_DETAILS": "Race detaljer",
+  "CIRCUIT_LAYOUT": "Bane layout",
+  "NEXT_RACE": "Næste race",
   "RACE_DATE": "Race",
   "QUALI_DATE": "Quali",
   "SPRINT_DATE": "Sprint",
-  "FP1_DATE": "Free Practice 1",
-  "FP2_DATE": "Free Practice 2",
-  "FP3_DATE": "Free Practice 3"
+  "FP1_DATE": "Fri Træning 1",
+  "FP2_DATE": "Fri Træning 2",
+  "FP3_DATE": "Fri Træning 3"
 }
