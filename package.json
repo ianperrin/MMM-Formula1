@@ -1,6 +1,6 @@
 {
   "name": "mmm-formula1",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A Formula 1 module for MagicMirror².",
   "scripts": {
     "test": "npm run test:prettier && npm run test:js && npm run test:css",

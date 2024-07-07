@@ -1,0 +1,16 @@
+{
+  "DRIVER": "Piloto",
+  "CONSTRUCTOR": "Construtor",
+  "SEASON": "Temporada",
+  "ROUND": "Etapa",
+  "NO DATA": "Sem informação informada pela api (ainda)",
+  "RACE_DETAILS": "Detalhes da corrida",
+  "CIRCUIT_LAYOUT": "Layout do circuito",
+  "NEXT_RACE": "Próxima corrida",
+  "RACE_DATE": "Corrida",
+  "QUALI_DATE": "Qualificação",
+  "SPRINT_DATE": "Sprint",
+  "FP1_DATE": "Treino Livre 1",
+  "FP2_DATE": "Treino Livre 2",
+  "FP3_DATE": "Treino Livre 3"
+}
