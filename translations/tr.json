@@ -1,0 +1,17 @@
+{
+    "DRIVER": "Pilotlar",
+    "CONSTRUCTOR": "Takımlar",
+    "SEASON": "Sezon",
+    "ROUND": "Etap",
+    "NO DATA": "Servis veri sağlamadı(henüz)",
+    "RACE_DETAILS": "Yarış detayları",
+    "CIRCUIT_LAYOUT": "Pist düzeni",
+    "NEXT_RACE": "Sonraki yarış",
+    "RACE_DATE": "Yarış",
+    "QUALI_DATE": "Sıralama",
+    "SPRINT_DATE": "Sprint",
+    "FP1_DATE": "1. Antrenman Turu",
+    "FP2_DATE": "2. Antrenman Turu",
+    "FP3_DATE": "3. Antrenman Turu"
+  }
+  
