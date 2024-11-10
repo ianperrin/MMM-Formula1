@@ -30,9 +30,6 @@
   },
   "homepage": "https://github.com/ianperrin/MMM-Formula1#readme",
   "dependencies": {
-<<<<<<< HEAD
-    "axios": ">=1.6.8"
-=======
     "axios": ">=1.7.4"
 >>>>>>> origin/snyk-fix-b12e927eab7b5b1577c18c189b14579b
   },
