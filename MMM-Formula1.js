@@ -77,7 +77,8 @@ Module.register("MMM-Formula1", {
       sv: "translations/sv.json",
       da: "translations/da.json",
       fr: "translations/fr.json",
-      tr: "translations/tr.json"
+      tr: "translations/tr.json",
+      pt: "translations/pt-br.json"
     };
   },
 
