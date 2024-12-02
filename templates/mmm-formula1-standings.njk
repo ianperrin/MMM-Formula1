@@ -136,7 +136,11 @@
     {% if (dataS and config.showNextRace ) %}
     	<table class="small align-left">
     	    <tr class="title light">
-                <td class="small" text-align="center">{{ "NEXT_RACE" | translate }}: {{ dataS.nextRaceDate }}: {{ dataS.nextRaceName }}</td>
+    		{% if (dataS.nextRaceDate ) %}
+                	<td class="small" text-align="center">{{ "NEXT_RACE" | translate }}: {{ dataS.nextRaceDate }}: {{ dataS.nextRaceName }}</td>
+		{% else %}
+                	<td class="small" text-align="center">{{ "LAST_RACE" | translate }}</td>
+        	{% endif %}
        	    </tr>
     	</table>
         {% endif %}

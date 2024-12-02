@@ -200,6 +200,8 @@ Module.register("MMM-Formula1", {
   prepareData(schedule) {
     const yesterday = moment().subtract(1, "day").format("YYYY-MM-DD");
     const currentround = this.findNextRound(schedule, yesterday);
+    Log.info(`${this.name} currentround: ${currentround}`);
+    Log.info(`${this.name} schedule.length: ${schedule.length}`);
 
     let templateScheduleData = null;
     // if currentround is null, no races are scheduled, dont display
@@ -208,11 +210,11 @@ Module.register("MMM-Formula1", {
         season: schedule[0].season,
         round: currentround,
         raceName: schedule[currentround - 1].raceName,
-        nextRaceName: schedule[currentround].raceName,
+        nextRaceName: currentround<schedule.length?schedule[currentround].raceName:null,
         circuitName: schedule[currentround - 1].Circuit.circuitName,
         circuitImage: this.circuitImages[schedule[currentround - 1].Circuit.circuitId],
         raceDate: this.formatDateAndTime(schedule[currentround - 1]),
-        nextRaceDate: this.formatDateAndTime(schedule[currentround]),
+        nextRaceDate: currentround<schedule.length?this.formatDateAndTime(schedule[currentround]):null,
         qualifyingDate: this.formatDateAndTime(schedule[currentround - 1].Qualifying),
         pract1Date: this.formatDateAndTime(schedule[currentround - 1].FirstPractice),
         pract2Date: this.formatDateAndTime(schedule[currentround - 1].SecondPractice),
