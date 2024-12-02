@@ -200,8 +200,6 @@ Module.register("MMM-Formula1", {
   prepareData(schedule) {
     const yesterday = moment().subtract(1, "day").format("YYYY-MM-DD");
     const currentround = this.findNextRound(schedule, yesterday);
-    Log.info(`${this.name} currentround: ${currentround}`);
-    Log.info(`${this.name} schedule.length: ${schedule.length}`);
 
     let templateScheduleData = null;
     // if currentround is null, no races are scheduled, dont display
