@@ -217,6 +217,9 @@ Module.register("MMM-Formula1", {
         pract1Date: this.formatDateAndTime(schedule[currentround - 1].FirstPractice),
         pract2Date: this.formatDateAndTime(schedule[currentround - 1].SecondPractice),
         pract3Date: this.formatDateAndTime(schedule[currentround - 1].ThirdPractice),
+	// this might break with jolpi. sprintQualifying was in SecondPractise on ergast,
+	//  might need extra line here and in the template: 
+	sprintQualifyingDate: this.formatDateAndTime(schedule[currentround - 1].SprintQualifying),
         sprintDate: this.formatDateAndTime(schedule[currentround - 1].Sprint),
         identifier: this.identifier,
         timeStamp: this.dataRefreshTimeStamp

@@ -115,6 +115,11 @@
 	    	<td class="small">{{ "FP3_DATE" | translate }}: {{ dataS.pract3Date }}</td>
        	    </tr>
 	    {% endif %}
+	    {% if (dataS.sprintQualifyingDate) %}
+    	    <tr class="title bright">
+	      	<td class="small">{{ "SPRINT_DATE" | translate }} {{ "QUALI_DATE" | translate }}: {{ dataS.sprintQualifyingDate }}</td>
+       	    </tr>
+	    {% endif %}
 	    {% if (dataS.sprintDate) %}
     	    <tr class="title bright">
 	      	<td class="small">{{ "SPRINT_DATE" | translate }}: {{ dataS.sprintDate }}</td>
