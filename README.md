@@ -9,6 +9,10 @@ This version combines standing and schedule in one module. Various options enabl
 [![Code Climate](https://codeclimate.com/github/ianperrin/MMM-Formula1/badges/gpa.svg)](https://codeclimate.com/github/ianperrin/MMM-Formula1)
 [![Known Vulnerabilities](https://snyk.io/test/github/ianperrin/MMM-Formula1/badge.svg)](https://snyk.io/test/github/ianperrin/MMM-Formula1)
 
+## API Change
+Starting 2025, the data provider for this module (ergast) is off line. Jolpi.ca provides a new api. In the next months this module will be altered.
+Not all data, e.q. the race schedule, is available at the endpoint yet. 
+
 ## Example
 
 ![Example screenshot](screenshot.png)
