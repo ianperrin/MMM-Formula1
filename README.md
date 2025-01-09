@@ -12,6 +12,7 @@ This version combines standing and schedule in one module. Various options enabl
 ## API Change
 Starting 2025, the data provider for this module (ergast) is off line. Jolpi.ca provides a new api. In the next months this module will be altered.
 Not all data, e.q. the race schedule, is available at the endpoint yet. 
+9 jan 2025: First race schedule data is getting to the mirror. Fixed a bug on handling missing time in data [brach devjan2025], will merge into master in next days. 
 
 ## Example
 
