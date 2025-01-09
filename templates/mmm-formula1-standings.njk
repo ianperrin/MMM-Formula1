@@ -102,37 +102,37 @@
        	    </tr>
 	    {% if (dataS.pract1Date) %}
     	    <tr class="title ">
-		<td class="small">{{ "FP1_DATE" | translate }}: {{ dataS.pract1Date }}</td>
+		<td class="small">{{ "FP1_DATE" | translate }}: {{ dataS.pract1Date|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.pract2Date) %}
     	    <tr class="title ">
-	    	<td class="small">{{ "FP2_DATE" | translate }}: {{ dataS.pract2Date }}</td>
+	    	<td class="small">{{ "FP2_DATE" | translate }}: {{ dataS.pract2Date|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.pract3Date) %}
     	    <tr class="title ">
-	    	<td class="small">{{ "FP3_DATE" | translate }}: {{ dataS.pract3Date }}</td>
+	    	<td class="small">{{ "FP3_DATE" | translate }}: {{ dataS.pract3Date|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.sprintQualifyingDate) %}
     	    <tr class="title bright">
-	      	<td class="small">{{ "SPRINT_DATE" | translate }} {{ "QUALI_DATE" | translate }}: {{ dataS.sprintQualifyingDate }}</td>
+	      	<td class="small">{{ "SPRINT_DATE" | translate }} {{ "QUALI_DATE" | translate }}: {{ dataS.sprintQualifyingDate|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.sprintDate) %}
     	    <tr class="title bright">
-	      	<td class="small">{{ "SPRINT_DATE" | translate }}: {{ dataS.sprintDate }}</td>
+	      	<td class="small">{{ "SPRINT_DATE" | translate }}: {{ dataS.sprintDate|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.qualifyingDate) %}
     	    <tr class="title bright">
-	    	<td class="small">{{ "QUALI_DATE" | translate }}: {{ dataS.qualifyingDate }}</td>
+	    	<td class="small">{{ "QUALI_DATE" | translate }}: {{ dataS.qualifyingDate|safe }}</td>
        	    </tr>
 	    {% endif %}
 	    {% if (dataS.raceDate) %}
     	    <tr class="title bright">
-	    	<td class="small">{{ "RACE_DATE" | translate }}: {{ dataS.raceDate }}</td>
+	    	<td class="small">{{ "RACE_DATE" | translate }}: {{ dataS.raceDate|safe }}</td>
        	    </tr>
 	    {% endif %}
         {% endif %}
@@ -142,7 +142,7 @@
     	<table class="small align-left">
     	    <tr class="title light">
     		{% if (dataS.nextRaceDate ) %}
-                	<td class="small" text-align="center">{{ "NEXT_RACE" | translate }}: {{ dataS.nextRaceDate }}: {{ dataS.nextRaceName }}</td>
+                	<td class="small" text-align="center">{{ "NEXT_RACE" | translate }}: {{ dataS.nextRaceDate|safe }}: {{ dataS.nextRaceName }}</td>
 		{% else %}
                 	<td class="small" text-align="center">{{ "LAST_RACE" | translate }}</td>
         	{% endif %}
