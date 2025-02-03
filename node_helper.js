@@ -37,7 +37,8 @@ module.exports = NodeHelper.create({
    */
   fetchApiData() {
     const season = this.config.season === "current" ? new Date().getFullYear() : this.config.season;
-    var f1Url = "http://ergast.com/api/f1/" + season;
+    //var f1Url = "http://ergast.com/api/f1/" + season;
+    var f1Url = "https://api.jolpi.ca/ergast/f1/" + season;
 
     if (this.config.loadDriver) this.invokeURL("DRIVER", f1Url + "/driverStandings.json");
     if (this.config.loadConstructor)
