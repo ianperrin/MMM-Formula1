@@ -133,15 +133,23 @@ Module.register("MMM-Formula1", {
       this.config
     );
 
-    // check if somebody has a birthday
-    this.dataDriverProfiles = []; // reset the Card array - prevents from dragging birthdays to the next day
-    const birthdayDriverStandings = MMMFormula1Utils.findBirthdayDrivers(this.dataDriverStandings);
-    if (birthdayDriverStandings.length > 0) {
-      // todo iterate
-      birthdayDriverStandings.forEach((driverStanding) => {
-        this.sendSocketNotification("DRIVER_PROFILE", driverStanding);
-      });
-    }
+    const todayStr = new Date().toDateString();
+
+    // Keep only today's profiles
+    this.dataDriverProfiles = this.dataDriverProfiles.filter(
+      (p) => new Date(p.timestamp).toDateString() === todayStr
+    );
+
+    // Create a Set for fast lookup
+    const existingCodes = new Set(this.dataDriverProfiles.map((p) => p.code));
+
+    // Find birthday drivers and fetch missing profiles
+    MMMFormula1Utils.findBirthdayDrivers(this.dataDriverStandings).forEach((ds) => {
+      if (!existingCodes.has(ds.Driver.code)) {
+        this.sendSocketNotification("DRIVER_PROFILE", ds);
+      }
+    });
+
     this.driverStandingsErrorCount = 0; // Reset error count
   },
 

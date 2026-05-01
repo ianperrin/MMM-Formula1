@@ -25,7 +25,6 @@ module.exports = NodeHelper.create({
     if (notification === "CONFIG") {
       this.config = payload; // Store the received configuration in the config object
       this.season = new Date().getFullYear();
-      this.loadRacinghubSeasonDrivers();
       this.restartPolling(); // Restart polling with the new configuration
     }
 
@@ -40,6 +39,7 @@ module.exports = NodeHelper.create({
   },
 
   async fetchApiData() {
+    await this.loadRacinghubSeasonDrivers(); // for resilience
     // Array to hold all the fetch requests
     const requests = [];
 
@@ -90,7 +90,7 @@ module.exports = NodeHelper.create({
   // fetch driver profile data from open F1 api and racinghub hub api
   async fetchDriverProfile(driverStanding) {
     const driverId_F1 = driverStanding.Driver.permanentNumber;
-    this.loadRacinghubSeasonDrivers(); // for resilience
+    await this.loadRacinghubSeasonDrivers(); // for resilience
 
     try {
       // Fetch driver image from OpenF1
@@ -101,7 +101,7 @@ module.exports = NodeHelper.create({
 
       // Create the backup driver ID using underscore between first and last name
       if (!driverId_RH && openF1Data) {
-        driverId_RH = `{openF1Data.first_name.toLowerCase()}_{openF1Data.last_name.toLowerCase()}`;
+        driverId_RH = `${openF1Data.first_name.toLowerCase()}-${openF1Data.last_name.toLowerCase()}`;
       }
 
       // Fetch career highlights from RacingHub
@@ -111,6 +111,7 @@ module.exports = NodeHelper.create({
       const profileData = {
         careerHighlights,
         openF1: openF1Data, // Driver's image
+        timestamp: new Date(),
         ...driverStanding // Include other driver data like name, nationality, etc.
       };
 
@@ -122,12 +123,23 @@ module.exports = NodeHelper.create({
   },
 
   async loadRacinghubSeasonDrivers() {
-    if (this.racingHubSeasonDriversData) return;
+    const now = Date.now();
+    const maxAge = 24 * 60 * 60 * 1000; // 24 hours in ms
+
+    // Check if cache exists and is still fresh
+    if (
+      this.racingHubSeasonDriversData &&
+      this.racingHubSeasonDriversTimestamp &&
+      now - this.racingHubSeasonDriversTimestamp < maxAge
+    ) {
+      return;
+    }
 
     try {
       const driversData = await fetchSeasonDrivers(this.season); // Fetch drivers using RacingHub API
       if (driversData) {
         this.racingHubSeasonDriversData = driversData;
+        this.racingHubSeasonDriversTimestamp = now;
       } else {
         this.handleError(`SEASON_DRIVERS_ERROR`, "Failed to fetch RacingHub season drivers");
       }

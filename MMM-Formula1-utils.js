@@ -130,7 +130,8 @@ function buildDriverCard(standing, OF_driver, RH_driver) {
     total_grand_slams: RH_driver?.total_grand_slams || 0,
     best_championship_position: RH_driver?.best_championship_position || "-",
     best_starting_grid_position: RH_driver?.best_starting_grid_position || "-",
-    best_race_result: RH_driver?.best_race_result || "-"
+    best_race_result: RH_driver?.best_race_result || "-",
+    timestamp: standing?.timestamp
   };
 }
 
@@ -169,13 +170,9 @@ function findBirthdayDrivers(standings) {
     const dob = new Date(driver.Driver.dateOfBirth); // Assuming "dateOfBirth" is part of the driver object
     var isBirthday = dob.getDate() === today.getDate() && dob.getMonth() === today.getMonth();
 
-    // TEST OVERRIDE (remove later)
-    if (driver.Driver.code === "VER") {
-      isBirthday = true;
-    }
-
     if (!isBirthday) return; // Skip if not birthday
 
+    console.warn("Birthday found: " + driver.Driver.code);
     birthdayDrivers.push(driver); // Add driver to the list if it's their birthday
   });
 
